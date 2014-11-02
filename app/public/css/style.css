@@ -1,0 +1,114 @@
+body {
+  padding: 50px;
+  background-color : #222;
+}
+
+body, input, select
+{
+	font: 14px "FreeSans", Helvetica, Arial, sans-serif;
+}
+
+input, select
+{
+	border : 1px solid #aaa;
+	background-color : #666;
+	color : #fff;
+}
+
+input[type=submit],
+input[type=button]
+{
+	border : 1px solid #aaa;
+	background-color: #888;
+}
+input[type=submit]:hover,
+input[type=button]:hover
+{
+	background-color : #999;
+	cursor : pointer;
+}
+
+a {
+  color: #00B7FF;
+}
+
+.controls {
+	background-color : rgba(120,120,120,0.5);
+	display: block;
+	position: absolute;
+	left : 10px;
+	top : 10px;
+	padding : 10px;
+	border : 1px solid #aaa;
+}
+
+.controls > ul
+{
+	list-style-type : none;
+	padding : 0;
+	margin : 0;
+}
+
+.controls > ul > li label
+{
+	display : inline-block;
+	width : 6em;
+	text-align: right;
+	margin-right: 5px;
+	color : #fff;
+	vertical-align: top;
+}
+
+.controls > ul > li > * + *
+{
+	margin-left: 5px;
+}
+
+.controls > ul > li + li
+{
+	margin-top : 5px;
+}
+
+.node *
+{
+	cursor: move;
+}
+
+.node circle
+{
+	fill : #444433;
+	stroke : #666633;
+	stroke-width : 2;
+}
+
+.node.active circle
+{
+	fill : #666644;
+}
+
+.node text
+{
+	fill : #fff;
+	font-weight: bold;
+	pointer-events : 'none';
+	text-shadow: 1px 1px 1px rgba(0,0,0,0.7);
+}
+
+.link
+{
+	stroke : #999933;
+	stroke-width : 10;
+}	  
+
+.tools circle
+{
+	fill : #aaa;
+	opacity : 0.8;
+}
+
+.connLine
+{
+	stroke-width : 5;
+	stroke : #883333;
+	cursor : move;
+}

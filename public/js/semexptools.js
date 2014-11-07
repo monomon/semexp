@@ -6,7 +6,7 @@
 		linkType : null
 	};
 
-	semexp.toolsProto = {
+	semexp.tools = {
 		init : function()
 		{
 
@@ -62,10 +62,8 @@
 							explorer.tools.setData('toNode', d3.select(nodeEl).datum());
 						}
 					} else {
-						node = null;
+						explorer.tools.setData('toNode', null);
 					}
-
-					console.log(d);
 				},
 
 				dragstart : function ()
@@ -81,8 +79,8 @@
 						origin = [fromNode.x, fromNode.y];
 					}
 
-					if (menuData && menuData.relationType) {
-						d.linkType = menuData.relationType;
+					if (menuData && menuData.defaultRelation) {
+						d.linkType = menuData.defaultRelation;
 					}
 
 					// place both points at the center for consistency
@@ -150,6 +148,9 @@
 			this.update();
 		},
 
+		// this is called from force.tick, which means at every frame
+		// be careful about the amount of updates
+		// 
 		update : function()
 		{
 
@@ -158,10 +159,16 @@
 			if (toolsData && !!toolsData.fromNode && toolsData.fromNode.name) {
 				tools.attr(
 					'transform',
-					'translate('+(toolsData.fromNode.x - 30)+','+toolsData.fromNode.y+')'
-				);
+					'translate('+
+					(toolsData.fromNode.x - Math.round(Math.log(toolsData.fromNode.relations+1)*15 + 25))+
+					','+
+					toolsData.fromNode.y+
+					')'
+				)
+				.transition().style('opacity', 1);
+			} else {
+				tools.style('opacity',0);
 			}
-			tools.transition().style('opacity', toolsData.fromNode ? 1 : 0);
 
 			if (toolsData &&
 				toolsData.fromNode !== null &&

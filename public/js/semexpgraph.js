@@ -1,54 +1,13 @@
 (function (semexp) {
 	'use strict';
-	semexp.graphProto = {
-			// translate from semantic network to a graph for the layout algorithm
-		// @todo: make this use custom filters for nodes and links
-		generateGraph : function (db)
-		{
-			var nodes = [];
-			var links = [];
-			var mps = db.q().filter('is', 'mp').all();
-
-			// build up graph data - translate from database
-			nodes = mps.map(function(item) {
-				return {
-					name : item,
-					relations : 0
-				};
-			});
-			
-			// links between nodes with a certain relation - make this configurable
-			for (var i = nodes.length - 1; i >= 0; i--) {
-				var knows = db.q().filter('knows', nodes[i].name).all();
-				// get all other nodes that are related to current node
-				var knowNodes = nodes.filter(function(item){
-					return knows.indexOf(item.name) >= 0;
-				});
-				console.log(knowNodes.length);
-
-				for (var j = knowNodes.length - 1; j>= 0; j--) {
-					nodes[i].relations++;
-					links.push({
-						source : nodes[i],
-						target : knowNodes[j]
-					});
-				}
-			}
-
-			return {
-				nodes : nodes,
-				links : links
-			};
-		},
-
+	semexp.graph = {
 		drawNodes : function(nodes, svg, dragFunc)
 		{
 			var node = this.layers.nodes.selectAll('.node').data(nodes);
 			
 			function updateRadius(d)
 			{
-				console.log(Math.pow(Math.E, d.relations) + 30);
-				return Math.pow(Math.E, d.relations) + 30;
+				return Math.round(Math.log(d.relations+1)*15 + 25);
 			}
 
 			var group = node.enter()
@@ -70,6 +29,8 @@
 			node.select('circle')
 				.attr('r', updateRadius);
 
+			node.exit().remove();
+
 			this.hookHandler(node, 'mouseenter');
 			this.hookHandler(node, 'mouseleave');
 
@@ -85,6 +46,8 @@
 			link.enter()
 				.append('line')
 				.classed('link', true);
+
+			link.exit().remove();
 
 			// return update selection
 			return link;
@@ -139,10 +102,8 @@
 		},
 
 		// todo: find out how to add nodes and links wihtout rebinding to force, etc.
-		refresh : function(db, svg, tickCallback)
+		refresh : function(graph, svg, tickCallback)
 		{
-			var graph = this.generateGraph(db);
-
 			var link = this.drawLinks(graph.links, svg);
 			var node = this.drawNodes(graph.nodes, svg, this.force.drag);
 

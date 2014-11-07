@@ -5,6 +5,7 @@
 			var prom = new Promise(function (resolve, reject) {
 				var xhr = new XMLHttpRequest();
 
+				// todo: decide what to do with progress
 				// xhr.addEventListener('progress', function (evt) {
 				// 	console.log(evt);
 				// });

@@ -6,6 +6,19 @@
 		linkType : null
 	};
 
+	var iconMapping = {
+		connect : 'relevance.svg',
+		disconnect : 'cut.svg',
+
+	};
+
+	var iconPath = '/3p/PicolSigns/picol_latest_prerelease_svg/';
+
+	function getIcon (key)
+	{
+		return iconPath + iconMapping[key];
+	}
+
 	semexp.tools = {
 		init : function()
 		{
@@ -22,17 +35,38 @@
 			var group = svg.append('g')
 				.classed('tools',true)
 				.datum(data)
-				.call(drag)
 				.style('opacity', 0);
-			group.append('circle')
-				.attr('r',10);
+
+			console.log(getIcon('connect'));
+
+			var circleRadius = 16
+
+			var connGroup = group.append('g').classed('tool', true).call(drag);
+			connGroup.append('circle')
+				.attr('r',circleRadius);
+			connGroup.append('svg:image')
+				.attr('xlink:href', getIcon('connect'))
+				.attr('height', circleRadius)
+				.attr('width', circleRadius)
+				.attr('x', -circleRadius/2)
+				.attr('y', -circleRadius/2);
+
+			var disconnGroup = group.append('g').classed('tool', true);
+			disconnGroup.append('circle')
+				.attr('r',circleRadius);
+			disconnGroup.append('svg:image')
+				.attr('xlink:href', getIcon('disconnect'))
+				.attr('height', circleRadius)
+				.attr('width', circleRadius)
+				.attr('x', -circleRadius/2)
+				.attr('y', -circleRadius/2);
 
 			this.connLine = svg.append('line').attr('class','connLine');
 
 			return group;
 		},
 
-		refresh : function(svg)
+		refresh : function()
 		{
 			d3.select('.tools').transition().style('opacity', 0);
 		},
@@ -46,13 +80,15 @@
 			var eventSwitch = {
 				drag : function (evt)
 				{
+					var pos = d3.mouse(d3.select('svg').node());
+					console.log(pos);
 					d3.select('.connLine')
-						.attr('x2', d3.event.x)
-						.attr('y2', d3.event.y);
+						.attr('x2', pos[0])
+						.attr('y2', pos[1]);
 
 					var node;
 
-					var d = d3.select(this).datum();
+					var d = d3.select('.tools').datum();
 
 					// if hovering over a node, set its datum as the toNode
 					var nodeEl = d3.event.sourceEvent.target.parentNode;
@@ -148,24 +184,52 @@
 			this.update();
 		},
 
+		getToolPosition : function(index, radius)
+		{
+			return {
+				x : Math.cos((Math.PI*(index*0.26+1)))*radius,
+				y : Math.sin((Math.PI*(index*0.26+1)))*radius
+			};
+		},
+
 		// this is called from force.tick, which means at every frame
 		// be careful about the amount of updates
 		// 
 		update : function()
 		{
 
+
 			var tools = d3.select('.tools');
 			var toolsData = tools.datum();
 			if (toolsData && !!toolsData.fromNode && toolsData.fromNode.name) {
+
 				tools.attr(
 					'transform',
 					'translate('+
-					(toolsData.fromNode.x - Math.round(Math.log(toolsData.fromNode.relations+1)*15 + 25))+
+					toolsData.fromNode.x+
 					','+
 					toolsData.fromNode.y+
 					')'
-				)
-				.transition().style('opacity', 1);
+				);
+
+				var radius = this.explorer.graph.getRadius(toolsData.fromNode);
+
+				// alas no custom scope in .each
+				var getToolPosition = this.getToolPosition;
+				tools.selectAll('.tool').each(function (data, index) {
+					var pos = getToolPosition(index, radius);
+					d3.select(this).attr(
+						'transform',
+						'translate('+
+						pos.x+
+						','+
+						pos.y+
+						')'
+					);
+				});
+
+
+				tools.transition().style('opacity', 1);
 			} else {
 				tools.style('opacity',0);
 			}

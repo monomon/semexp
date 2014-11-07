@@ -131,10 +131,17 @@ a {
 	stroke-width : 10;
 }	  
 
-.tools circle
+.tools .tool
 {
-	fill : #aaa;
+	fill : #888;
+	stroke : #aaa;
+	stroke-width: 1;
 	opacity : 0.8;
+}
+
+.tools .connect
+{
+	background-image : url('../3p/PicolSigns/picol_latest_prerelease_svg/relevance.svg');
 }
 
 .connLine

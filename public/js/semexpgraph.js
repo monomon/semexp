@@ -1,22 +1,24 @@
 (function (semexp) {
 	'use strict';
 	semexp.graph = {
+		// radius calc function - depends on number of relations
+		// make this configurable somehow...
+		getRadius : function(d)
+		{
+			return Math.round(Math.log(d.relations+1)*20 + 25);
+		},
+
 		drawNodes : function(nodes, svg, dragFunc)
 		{
 			var node = this.layers.nodes.selectAll('.node').data(nodes);
 			
-			function updateRadius(d)
-			{
-				return Math.round(Math.log(d.relations+1)*15 + 25);
-			}
-
 			var group = node.enter()
 				.append('g')
 				.call(dragFunc)
 				.classed('node', true);
 
 			group.append('circle')
-				.attr('r', updateRadius);
+				.attr('r', this.getRadius);
 
 			group.append('text')
 				.text(function(d) { return d.name; })
@@ -27,7 +29,7 @@
 			  .text(function(d) { return d.name; });
 
 			node.select('circle')
-				.attr('r', updateRadius);
+				.attr('r', this.getRadius);
 
 			node.exit().remove();
 
@@ -80,7 +82,7 @@
 			return subject.on(eventName, eventSwitch[eventName]);
 		},
 
-		draw : function(db, svg, tickCallback)
+		draw : function(db, svg, tickComponents)
 		{
 			this.force = d3.layout.force()
 				.linkStrength(0.8)
@@ -98,11 +100,11 @@
 				nodes : svg.append('g').classed('nodes', true)
 			};
 
-			this.refresh(db, svg, tickCallback);
+			this.refresh(db, svg, tickComponents);
 		},
 
 		// todo: find out how to add nodes and links wihtout rebinding to force, etc.
-		refresh : function(graph, svg, tickCallback)
+		refresh : function(graph, svg, tickComponents)
 		{
 			var link = this.drawLinks(graph.links, svg);
 			var node = this.drawNodes(graph.nodes, svg, this.force.drag);
@@ -122,7 +124,9 @@
 					return ('translate('+d.x+','+d.y+')');
 				});
 
-				tickCallback();
+				tickComponents.forEach(function (item) {
+					item.update.call(item);
+				});
 			});
 		},
 

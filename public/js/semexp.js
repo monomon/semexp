@@ -68,9 +68,15 @@ an experiment in navigating semantic networks
 			this.refresh();
 		}},
 
+		removeNode : { value : function(nodeName)
+		{
+			console.log(nodeName);
+		}},
+
 		refresh : { value : function()
 		{
-			this.graph.refresh(this.model.generateGraph(), this.svg, this.tools.update);
+			// this hooks the tick handler; perhaps move elsewhere
+			this.graph.refresh(this.model.generateGraph(), this.svg, [this.tools]);
 			this.tools.refresh();
 		}},
 
@@ -78,7 +84,7 @@ an experiment in navigating semantic networks
 		{
 			// clean svg
 			d3.selectAll('svg *').remove();
-			this.graph.draw(this.model.generateGraph(), this.svg, this.tools.update, this.menu.menuData);
+			this.graph.draw(this.model.generateGraph(), this.svg, [this.tools], this.menu.menuData);
 			this.tools.draw(this.svg);
 		}},
 

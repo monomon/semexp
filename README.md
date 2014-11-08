@@ -35,6 +35,11 @@ function getData(config)
 	
 	xhr.send();
 }
+
+getData({
+	method : 'GET',
+	url : 'localhost'
+});
 ```
 	
 #Dependencies#

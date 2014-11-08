@@ -38,5 +38,5 @@ function getData(config)
 ```
 	
 #Dependencies#
-* [semnet](https://github.com/asciimoo/semnet) for the semantic model
-* [d3](https://github.com/mbostock/d3) for drawing the graph
+* [semnet](https://github.com/asciimoo/semnet) semantic network implementation
+* [d3](https://github.com/mbostock/d3) visualization library

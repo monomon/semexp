@@ -102,22 +102,11 @@ an experiment in navigating semantic networks
 			console.log(this.model.export());
 		}},
 
-		load : { value : function()
+		load : { value : function(data)
 		{
-			var explorer = this;
-
-			req.send(null, {
-				method : 'GET',
-				url : 'http://localhost:3000/data'
-			}).then(
-			function (data) {
-				explorer.model.loadData(data);
-				explorer.menu.draw();
-				explorer.draw();
-			}, 
-			function (error) {
-				console.log(error);
-			});
+			this.model.loadData(data);
+			this.menu.draw();
+			this.draw();
 		}}
 	});
 

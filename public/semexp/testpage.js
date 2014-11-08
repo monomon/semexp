@@ -48,15 +48,4 @@ document.addEventListener('DOMContentLoaded', function(evt) {
 	};
 
 	explorer.load(data);
-
-	// req.send(null, {
-	// 	method : 'GET',
-	// 	url : 'http://localhost:3000/data'
-	// }).then(
-	// function (data) {
-	// 	explorer.load(data);
-	// },
-	// function (error) {
-	// 	console.log(error);
-	// });
 });

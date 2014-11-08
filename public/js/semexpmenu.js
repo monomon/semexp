@@ -2,21 +2,28 @@
 	'use strict';
 
 	var defaultData = {
-		defaultFactRelation : 'is',
-		defaultFactEntity : 'mp',
-		defaultRelation : 'knows',
-		filterFactRelation : 'is',
-		filterFactEntity : 'mp',
-		filterRelation : 'knows'
+		defaultFactRelation : undefined,
+		defaultFactEntity : undefined,
+		defaultRelation : undefined,
+		filterFactRelation : undefined,
+		filterFactEntity : undefined,
+		filterFactToggle : true,
+		filterRelation : 'is'
 	};
 
 	semexp.menu = {
-		draw : function ()
+		draw : function (data)
 		{
 			var explorer = this.explorer;
+
 			var menuEl = d3.select('body')
-				.append('form')
-				.classed('controls', true)
+				.append('sidebar')
+				.classed('controls', true);
+
+			var menuData = data || defaultData;
+			menuEl.datum(menuData);
+
+			var form = menuEl.append('form')
 				.on('submit', function() {
 					if (d3.event) d3.event.preventDefault();
 
@@ -34,13 +41,12 @@
 			// fixme: automate this stuff a little more
 			var elType = 'div';
 
-			var nameControls = menuEl.append(elType);
-			nameControls.append('label').text('node name');
-			nameControls.append('input')
+			form.append('label').text('node name');
+			form.append('input')
 				.attr('type','text')
 				.attr('name', 'name')
-				.attr('emptytext', 'name');
-			nameControls.append('input')
+				.attr('placeholder', 'name');
+			form.append('input')
 				.attr('type','submit')
 				.property('value', 'add node');
 
@@ -69,12 +75,16 @@
 				function () {
 					explorer.refresh();
 				}
-			);
+			).append('input')
+				.attr('type', 'checkbox')
+				.style({'width': 15, 'flex' : 'none'})
+				.attr('name', 'filterFactToggle')
+				.on('change', this.updateCheckbox);
 
 			this.createRelationSelector(
 				menuEl.append(elType),
 				'filter',
-				'relation type',
+				'filter relation',
 				function () {
 					explorer.refresh();
 				}
@@ -96,8 +106,6 @@
 					console.log(this);
 				});
 
-			var menuData = defaultData;
-			menuEl.datum(menuData);
 			this.applyData(menuData);
 
 			return menuEl;
@@ -110,9 +118,10 @@
 			rootElement.append('label').text(label);
 			rootElement.append('select')
 				.attr('name', basename + 'FactRelation')
+				.classed('relationSelector', true)
 				.on('change', this.updateData)
 				.selectAll('option')
-				.data(explorer.model.getRelations())
+				.data(Object.keys(explorer.model.getRelations()))
 				.enter()
 				.append('option')
 				.attr('value', function(d) {
@@ -121,8 +130,10 @@
 				.text(function(d) {
 					return d;
 				});
+
 			rootElement.append('select')
 				.attr('name', basename + 'FactEntity')
+				.classed('entitySelector', true)
 				.on('change', this.updateData)
 				.selectAll('option')
 				.data(explorer.model.getEntities())
@@ -134,10 +145,13 @@
 				.text(function(d) {
 					return d;
 				});
+
 			rootElement.append('input')
 				.property('value', 'apply')
 				.property('type', 'button')
 				.on('click', buttonCallback);
+
+
 
 			return rootElement;
 		},
@@ -146,12 +160,15 @@
 		{
 			var explorer = this.explorer;
 
+			var relations = Object.keys(explorer.model.getRelations());
+
 			rootElement.append('label').text(label);
-			rootElement.append('select')
+			var select = rootElement.append('select')
 				.attr('name', basename + 'Relation')
-				.on('change', this.updateData)
-				.selectAll('option')
-				.data(explorer.model.getRelations())
+				.on('change', this.updateData);
+
+			select.selectAll('option')
+				.data(relations)
 				.enter()
 				.append('option')
 				.attr('value', function(d) {
@@ -160,6 +177,8 @@
 				.text(function(d) {
 					return d;
 				});
+
+			select.attr('value', relations[0]);
 
 			return rootElement;
 		},
@@ -172,6 +191,15 @@
 			d3.select('.controls').datum(d);
 		},
 
+		updateCheckbox : function ()
+		{
+			var d = d3.select('.controls').datum();
+			d[this.name] = this.checked;
+			this.value = this.checked;
+			d3.select('.controls').datum(d);		
+		},
+
+		// apply data to controls
 		applyData : function (data)
 		{
 			var rootElement = d3.select('.controls');
@@ -188,6 +216,12 @@
 			} else {
 				return d3.select('.controls').datum();
 			}
+		},
+
+		refresh : function ()
+		{
+			d3.selectAll('.entitySelector').data(this.explorer.model.getEntities());
+			d3.selectAll('.relationSelector').data(this.explorer.model.getRelations());
 		}
 	};
 

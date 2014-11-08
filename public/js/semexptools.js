@@ -9,7 +9,8 @@
 	var iconMapping = {
 		connect : 'relevance.svg',
 		disconnect : 'cut.svg',
-
+		document : 'document_text.svg',
+		remove : 'database_remove.svg',
 	};
 
 	var iconPath = '/3p/PicolSigns/picol_latest_prerelease_svg/';
@@ -27,10 +28,10 @@
 
 		draw : function(svg)
 		{
-			var drag = d3.behavior.drag();
-			this.hookHandler(drag, 'drag');
-			this.hookHandler(drag, 'dragstart');
-			this.hookHandler(drag, 'dragend');
+			var connDrag = d3.behavior.drag();
+			this.hookHandler(connDrag, 'drag');
+			this.hookHandler(connDrag, 'dragstart');
+			this.hookHandler(connDrag, 'dragend');
 			var data = defaultData;
 			var group = svg.append('g')
 				.classed('tools',true)
@@ -39,36 +40,64 @@
 
 			console.log(getIcon('connect'));
 
-			var circleRadius = 16
+			var circleRadius = 16;
 
-			var connGroup = group.append('g').classed('tool', true).call(drag);
-			connGroup.append('circle')
-				.attr('r',circleRadius);
-			connGroup.append('svg:image')
-				.attr('xlink:href', getIcon('connect'))
-				.attr('height', circleRadius)
-				.attr('width', circleRadius)
-				.attr('x', -circleRadius/2)
-				.attr('y', -circleRadius/2);
+			this.createTool(
+				group,
+				getIcon('connect'),
+				'connect to another node',
+				circleRadius
+			).call(connDrag);
 
-			var disconnGroup = group.append('g').classed('tool', true);
-			disconnGroup.append('circle')
-				.attr('r',circleRadius);
-			disconnGroup.append('svg:image')
-				.attr('xlink:href', getIcon('disconnect'))
-				.attr('height', circleRadius)
-				.attr('width', circleRadius)
-				.attr('x', -circleRadius/2)
-				.attr('y', -circleRadius/2);
+			this.createTool(
+				group,
+				getIcon('disconnect'),
+				'disconnect from another node',
+				circleRadius
+			);
+
+			this.createTool(
+				group,
+				getIcon('document'),
+				'open node information',
+				circleRadius
+			).on('click', function (evt) {
+				console.log(evt);
+			});
+
+			this.createTool(
+				group,
+				getIcon('remove'),
+				'remove node',
+				circleRadius
+			);
 
 			this.connLine = svg.append('line').attr('class','connLine');
 
 			return group;
 		},
 
+		createTool : function(rootElement, icon, label, radius)
+		{
+			var g = rootElement.append('g')
+				.classed('tool', true);
+			g.append('title').text(label);
+			g.append('circle')
+				.attr('r',radius);
+			g.append('svg:image')
+				.attr('xlink:href', icon)
+				.attr('height', radius)
+				.attr('width', radius)
+				.attr('x', -radius/2)
+				.attr('y', -radius/2);
+
+			return g;
+		},
+
 		refresh : function()
 		{
-			d3.select('.tools').transition().style('opacity', 0);
+			this.setData('fromNode', null);
+			d3.select('.tools').transition().style({'opacity': 0});
 		},
 
 		/*
@@ -78,28 +107,34 @@
 		{
 			var explorer = this.explorer;
 			var eventSwitch = {
-				drag : function (evt)
+				drag : function (data)
 				{
 					var pos = d3.mouse(d3.select('svg').node());
-					console.log(pos);
+
 					d3.select('.connLine')
 						.attr('x2', pos[0])
 						.attr('y2', pos[1]);
 
-					var node;
-
 					var d = d3.select('.tools').datum();
 
 					// if hovering over a node, set its datum as the toNode
-					var nodeEl = d3.event.sourceEvent.target.parentNode;
+					var nodeEl = d3.select(d3.event.sourceEvent.target.parentNode);
 					if (nodeEl &&
-						nodeEl.classList.contains('node')) {
-						if (d.toNode != d3.select(nodeEl).datum()) {
-							explorer.tools.setData('toNode', d3.select(nodeEl).datum());
+						nodeEl.classed('node')) {
+
+						if (d.toNode != nodeEl.datum()) {
+							// explorer.tools.setData('toNode', d3.select(nodeEl).datum());
+							data.toNode = nodeEl.datum();
+							nodeEl.classed('activeTo', true);
+
 						}
 					} else {
-						explorer.tools.setData('toNode', null);
+						// explorer.tools.setData('toNode', null);
+						data.toNode = null;
+						d3.selectAll('.activeTo').classed('activeTo', false);
 					}
+
+					return data;
 				},
 
 				dragstart : function ()
@@ -110,10 +145,10 @@
 
 					var menuData = d3.select('.controls').datum();
 
-					if (d && d.fromNode !== null) {
-						var fromNode = d.fromNode;
-						origin = [fromNode.x, fromNode.y];
-					}
+					// if (d && d.fromNode !== null) {
+					// 	var fromNode = d.fromNode;
+					// 	origin = [fromNode.x, fromNode.y];
+					// }
 
 					if (menuData && menuData.defaultRelation) {
 						d.linkType = menuData.defaultRelation;
@@ -132,19 +167,20 @@
 					// this could be made better...
 					explorer.graph.paralyzeNodes();
 				},
-				dragend : function (toolsData)
+				dragend : function (data)
 				{
 					d3.event.sourceEvent.stopPropagation();
 					d3.select('.connLine').transition().style('opacity', 0);
 					console.log('dropping (!)');
+					d3.selectAll('.activeTo').classed('activeTo', false);
 
-					if (toolsData && 
-						toolsData.fromNode &&
-						toolsData.toNode &&
-						toolsData.fromNode != toolsData.toNode &&
-						toolsData.linkType) {
+					if (data && 
+						data.fromNode &&
+						data.toNode &&
+						data.fromNode != data.toNode &&
+						data.linkType) {
 
-						explorer.addLink(toolsData.fromNode.name, toolsData.linkType, toolsData.toNode.name);
+						explorer.addLink(data.fromNode.name, data.linkType, data.toNode.name);
 						console.log('connecting (!)');
 					}
 
@@ -184,11 +220,11 @@
 			this.update();
 		},
 
-		getToolPosition : function(index, radius)
+		getToolPosition : function(angle, radius)
 		{
 			return {
-				x : Math.cos((Math.PI*(index*0.26+1)))*radius,
-				y : Math.sin((Math.PI*(index*0.26+1)))*radius
+				x : Math.cos(angle)*(radius),
+				y : Math.sin(angle)*(radius)
 			};
 		},
 
@@ -197,10 +233,9 @@
 		// 
 		update : function()
 		{
-
-
 			var tools = d3.select('.tools');
 			var toolsData = tools.datum();
+
 			if (toolsData && !!toolsData.fromNode && toolsData.fromNode.name) {
 
 				tools.attr(
@@ -213,11 +248,13 @@
 				);
 
 				var radius = this.explorer.graph.getRadius(toolsData.fromNode);
+				var angleIncrement = 33/radius;
 
 				// alas no custom scope in .each
 				var getToolPosition = this.getToolPosition;
 				tools.selectAll('.tool').each(function (data, index) {
-					var pos = getToolPosition(index, radius);
+					var angle = (index*angleIncrement)-Math.PI;
+					var pos = getToolPosition(angle, radius+2);
 					d3.select(this).attr(
 						'transform',
 						'translate('+

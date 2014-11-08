@@ -5,12 +5,13 @@
 		// make this configurable somehow...
 		getRadius : function(d)
 		{
-			return Math.round(Math.log(d.relations+1)*20 + 25);
+			return Math.round(Math.log(d.relations+1)*15 + 40);
 		},
 
-		drawNodes : function(nodes, svg, dragFunc)
+		drawNodes : function(nodes, layer, dragFunc)
 		{
-			var node = this.layers.nodes.selectAll('.node').data(nodes);
+			layer.selectAll('.node').remove();
+			var node = layer.selectAll('.node').data(nodes);
 			
 			var group = node.enter()
 				.append('g')
@@ -40,14 +41,41 @@
 			return node;
 		},
 
-		drawLinks : function(links, svg)
+		drawLinks : function(links, layer)
 		{
-			var link = this.layers.links.selectAll('.link')
-				.data(links);
+			layer.selectAll('.link').remove();
+			var link = layer.selectAll('.link').data(links);
 
-			link.enter()
-				.append('line')
+			var g = link.enter()
+				.append('g')
 				.classed('link', true);
+
+			g.append('line')
+				.attr('marker-end', 'url(#Triangle)');
+			var label = g.append('g')
+				.classed('label', true);
+
+			var text = label
+				.append('text')
+				.text(function (d) {
+					console.log(d);
+					return d.name;
+				})
+				.attr('text-anchor', 'middle')
+				.attr('alignment-baseline', 'central');
+
+			if (text.node()) {
+				// add background box
+				var bbox = text.node().getBBox();
+				var padding = 10;
+				label.insert('rect', 'text')
+					.attr('width',bbox.width+padding)
+					.attr('height', bbox.height+padding)
+					.attr('x',-(bbox.width+padding)*0.5)
+					.attr('y',-(bbox.height+padding)*0.5-5)
+					.attr('rx', 8)
+					.attr('ry', 8);
+			}
 
 			link.exit().remove();
 
@@ -82,48 +110,70 @@
 			return subject.on(eventName, eventSwitch[eventName]);
 		},
 
-		draw : function(db, svg, tickComponents)
+		draw : function(graph, svg, tickComponents)
 		{
 			this.force = d3.layout.force()
 				.linkStrength(0.8)
-				.distance(150)
+				.distance(200)
 				.friction(0.9)
-				.charge(-250)
-				.gravity(0.05)
-				.theta(0.8)
-				.alpha(0.5)
+				.charge(-200)
+				.gravity(0.02)
+				.theta(0.9)
+				.alpha(0.7)
 				.size([svg.property('width').baseVal.value, svg.property('height').baseVal.value]);
 
+			var defs = svg.append('defs');
+			defs.append('marker')
+				.attr('id', 'Triangle')
+				.attr('orient', 'auto')
+				.attr('refX', 6)
+				.attr('refY', 2)
+				.attr('markerUnits', 'strokeWidth')
+				.attr('markerWidth', 10)
+				.attr('markerHeight', 10)
+				.append('path')
+				.attr('fill', '#999933')
+				.attr('d', 'M 0 0 L 3 2 L 0 4 z');
 
 			this.layers = {
 				links : svg.append('g').classed('links', true),
 				nodes : svg.append('g').classed('nodes', true)
 			};
 
-			this.refresh(db, svg, tickComponents);
+			this.refresh(graph, tickComponents);
 		},
 
 		// todo: find out how to add nodes and links wihtout rebinding to force, etc.
-		refresh : function(graph, svg, tickComponents)
+		refresh : function(graph, tickComponents)
 		{
-			var link = this.drawLinks(graph.links, svg);
-			var node = this.drawNodes(graph.nodes, svg, this.force.drag);
-
+			var link = this.drawLinks(graph.links, this.layers.links);
+			var node = this.drawNodes(graph.nodes, this.layers.nodes, this.force.drag);
 			this.force
 				.links(graph.links)
 				.nodes(graph.nodes)
 				.start();
+
 			// update links and nodes with force
 			this.force.on('tick', function () {
-				link.attr('x1', function(d) { return d.source.x; })
+				link.select('line')
+					.attr('x1', function(d) { return d.source.x; })
 					.attr('y1', function(d) { return d.source.y; })
 					.attr('x2', function(d) { return d.target.x; })
 					.attr('y2', function(d) { return d.target.y; });
 
+				link.select('.label')
+					.attr('transform', function(d) {
+						return 'translate('+
+						(d.source.x+d.target.x)/2+
+						','+
+						(d.source.y+d.target.y)/2+
+						')';
+					 });
 				node.attr('transform', function(d) {
 					return ('translate('+d.x+','+d.y+')');
 				});
 
+				// components registered and they have an udpate method
 				tickComponents.forEach(function (item) {
 					item.update.call(item);
 				});

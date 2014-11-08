@@ -11,7 +11,11 @@
 				// });
 				
 				xhr.addEventListener('load', function (evt) {
-					resolve(JSON.parse(evt.target.responseText));
+					try {
+						resolve(JSON.parse(evt.target.responseText));
+					} catch (e) {
+						console.log(e);
+					}
 				});
 
 				xhr.addEventListener('error', function (evt) {

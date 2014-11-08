@@ -4,9 +4,10 @@ var router = express.Router();
 
 /* retreive data from db and send */
 router.get('/data', function(req,res) {
-	var dummyData =
-		'{"entities":{"is":{},"mp":{"contains":["Hristo","Pe6o"]},"Hristo":{"is":["mp"],"knows":["Pe6o"]},"knows":{},"Pe6o":{"is":["mp"]}},"relations":{"is":{"transitive":true,"opposite":"contains"},"contains":{"transitive":true,"opposite":"is"},"knows":{"transitive":false,"opposite":"knows"}}}';
+	// var dummyData =
+		// '{"entities":{"is":{},"mp":{"contains":["Hristo","Pe6o"]},"Hristo":{"is":["mp"],"knows":["Pe6o"]},"knows":{},"Pe6o":{"is":["mp"]}},"relations":{"is":{"transitive":true,"opposite":"contains"},"contains":{"transitive":true,"opposite":"is"},"knows":{"transitive":false,"opposite":"knows"}}}';
 	// res.send(JSON.stringify(data));
+	var dummyData = '{}';
 	res.send(dummyData);
 });
 

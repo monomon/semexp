@@ -59,6 +59,10 @@ an experiment in navigating semantic networks
 
 		addLink : { value : function(from, link, to)
 		{
+			if (from == to) {
+				return;
+			}
+
 			console.log(from);
 			console.log(link);
 			console.log(to);
@@ -76,15 +80,20 @@ an experiment in navigating semantic networks
 		refresh : { value : function()
 		{
 			// this hooks the tick handler; perhaps move elsewhere
-			this.graph.refresh(this.model.generateGraph(), this.svg, [this.tools]);
+			this.graph.refresh(this.model.generateGraph(), [this.tools]);
 			this.tools.refresh();
+			this.menu.refresh();
 		}},
 
 		draw : { value : function()
 		{
 			// clean svg
-			d3.selectAll('svg *').remove();
-			this.graph.draw(this.model.generateGraph(), this.svg, [this.tools], this.menu.menuData);
+			this.svg.selectAll('*').remove();
+			this.graph.draw(
+				this.model.generateGraph(),
+				this.svg,
+				[this.tools],
+				this.menu.getData());
 			this.tools.draw(this.svg);
 		}},
 

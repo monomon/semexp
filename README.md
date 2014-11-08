@@ -33,7 +33,7 @@ function getData(config)
 		true
 	);
 	
-	  xhr.send();
+	xhr.send();
 }
 ```
 	

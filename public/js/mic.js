@@ -7,5 +7,14 @@ document.addEventListener('DOMContentLoaded', function(evt) {
 		height : 600
 	});
 
-	explorer.load();
+	req.send(null, {
+		method : 'GET',
+		url : 'http://localhost:3000/data'
+	}).then(
+	function (data) {
+		explorer.load(data);
+	},
+	function (error) {
+		console.log(error);
+	});
 });

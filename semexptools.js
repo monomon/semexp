@@ -21,10 +21,6 @@
 	}
 
 	semexp.tools = {
-		init : function()
-		{
-
-		},
 
 		draw : function(svg)
 		{

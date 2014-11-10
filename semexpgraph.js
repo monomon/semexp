@@ -113,7 +113,7 @@
 		draw : function(graph, svg, tickComponents)
 		{
 			this.force = d3.layout.force()
-				.linkStrength(0.8)
+				.linkStrength(0.6)
 				.distance(200)
 				.friction(0.9)
 				.charge(-200)
@@ -159,8 +159,7 @@
 					.attr('x1', function (d) { return d.source.x; })
 					.attr('y1', function (d) { return d.source.y; })
 					.attr('x2', function (d) { return d.target.x; })
-					.attr('y2', function (d) { return d.target.y; })
-					.attr('refX', function (d) { return d.source.x; });
+					.attr('y2', function (d) { return d.target.y; });
 
 				link.select('.label')
 					.attr('transform', function(d) {

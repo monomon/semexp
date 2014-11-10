@@ -11,12 +11,6 @@
 			}
 
 			db.import(data);
-			// db.add('isA', { transitive : false, opposite : 'classOf'});
-			db.add('animal');
-			db.add('dinosaurus');
-			db.fact('dinosaurus', 'is', 'animal');
-			db.add('stegosaurus');
-			db.fact('stegosaurus', 'is', 'dinosaurus');
 		},
 
 		// translate from semantic network to a graph for the layout algorithm
@@ -55,9 +49,9 @@
 
 			// go through all relations, add links for each
 			// go through each pair of nodes
-			if (menuData.filterFactToggle === true &&
+			if (menuData.filterRelationToggle === true &&
 				menuData.filterRelation) {
-				oldRelations = relations;
+				var oldRelations = relations;
 				relations = {};
 				relations[menuData.filterRelation] = oldRelations[menuData.filterRelation];
 			}

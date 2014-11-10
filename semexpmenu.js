@@ -8,7 +8,8 @@
 		filterFactRelation : undefined,
 		filterFactEntity : undefined,
 		filterFactToggle : true,
-		filterRelation : 'is'
+		filterRelation : 'is',
+		filterRelationToggle : true
 	};
 
 	semexp.menu = {
@@ -31,8 +32,6 @@
 					if (!value || value === '') {
 						return false;
 					}
-
-					console.log(value);
 
 					explorer.addNode(value);
 					menuEl.select('input[type=text]').property('value', '');
@@ -79,7 +78,8 @@
 				.attr('type', 'checkbox')
 				.style({'width': 15, 'flex' : 'none'})
 				.attr('name', 'filterFactToggle')
-				.on('change', this.updateCheckbox);
+				.on('change', this.updateCheckbox)
+				.property('checked', menuData.filterFactToggle);
 
 			this.createRelationSelector(
 				menuEl.append(elType),
@@ -88,7 +88,12 @@
 				function () {
 					explorer.refresh();
 				}
-			);
+			).append('input')
+				.attr('type', 'checkbox')
+				.style({'width': 15, 'flex' : 'none'})
+				.attr('name', 'filterRelationToggle')
+				.on('change', this.updateCheckbox)
+				.property('checked', menuData.filterRelationToggle);
 
 			var buttonGroup = menuEl.append(elType);
 			buttonGroup.append('input')
@@ -106,6 +111,12 @@
 					console.log(this);
 				});
 
+			menuEl.selectAll('select').each(function (data) {
+				console.log(data[this.name] = this.value);
+			});
+
+			console.log(menuData);
+
 			this.applyData(menuData);
 
 			return menuEl;
@@ -116,12 +127,15 @@
 			var explorer = this.explorer;
 
 			rootElement.append('label').text(label);
-			rootElement.append('select')
+			var relations = Object.keys(explorer.model.getRelations());
+
+			var select = rootElement.append('select')
 				.attr('name', basename + 'FactRelation')
 				.classed('relationSelector', true)
-				.on('change', this.updateData)
-				.selectAll('option')
-				.data(Object.keys(explorer.model.getRelations()))
+				.on('change', this.updateData);
+
+			select.selectAll('option')
+				.data(relations)
 				.enter()
 				.append('option')
 				.attr('value', function(d) {
@@ -131,12 +145,16 @@
 					return d;
 				});
 
-			rootElement.append('select')
+			select.property('value', relations[0]);
+
+			var entities = explorer.model.getEntities();
+			select = rootElement.append('select')
 				.attr('name', basename + 'FactEntity')
 				.classed('entitySelector', true)
-				.on('change', this.updateData)
-				.selectAll('option')
-				.data(explorer.model.getEntities())
+				.on('change', this.updateData);
+
+			select.selectAll('option')
+				.data(entities)
 				.enter()
 				.append('option')
 				.attr('value', function(d) {
@@ -145,13 +163,13 @@
 				.text(function(d) {
 					return d;
 				});
+
+			select.property('value', entities[0]);
 
 			rootElement.append('input')
 				.property('value', 'apply')
 				.property('type', 'button')
 				.on('click', buttonCallback);
-
-
 
 			return rootElement;
 		},
@@ -178,7 +196,8 @@
 					return d;
 				});
 
-			select.attr('value', relations[0]);
+			select.property('value', relations[0]);
+
 
 			return rootElement;
 		},
@@ -196,7 +215,7 @@
 			var d = d3.select('.controls').datum();
 			d[this.name] = this.checked;
 			this.value = this.checked;
-			d3.select('.controls').datum(d);		
+			d3.select('.controls').datum(d);
 		},
 
 		// apply data to controls

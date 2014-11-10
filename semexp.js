@@ -18,9 +18,6 @@ an experiment in navigating semantic networks
 (function(semexp) {
 	'use strict';
 	
-	var request = Object.create(req);
-
-
 	Object.defineProperties(semexp, {
 		init : { value : function(config)
 		{
@@ -88,6 +85,7 @@ an experiment in navigating semantic networks
 		draw : { value : function()
 		{
 			// clean svg
+			this.menu.draw();
 			this.svg.selectAll('*').remove();
 			this.graph.draw(
 				this.model.generateGraph(),
@@ -105,7 +103,6 @@ an experiment in navigating semantic networks
 		load : { value : function(data)
 		{
 			this.model.loadData(data);
-			this.menu.draw();
 			this.draw();
 		}}
 	});

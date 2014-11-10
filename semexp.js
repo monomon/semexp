@@ -80,15 +80,16 @@ an experiment in navigating semantic networks
 		refresh : { value : function()
 		{
 			// this hooks the tick handler; perhaps move elsewhere
+			this.menu.refresh();
 			this.graph.refresh(this.model.generateGraph(), [this.tools]);
 			this.tools.refresh();
-			this.menu.refresh();
 		}},
 
 		draw : { value : function()
 		{
 			// clean svg
 			// this.svg.selectAll('*').remove();
+			this.menu.draw();
 			this.graph.draw(
 				this.model.generateGraph(),
 				this.svg,
@@ -104,7 +105,6 @@ an experiment in navigating semantic networks
 
 		load : { value : function(data)
 		{
-			this.menu.draw();
 			this.model.loadData(data);
 			this.draw();
 		}}

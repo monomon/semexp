@@ -8,7 +8,7 @@ document.addEventListener('DOMContentLoaded', function(evt) {
 	});
 
 	explorer.load({});
-	explorer.addRelation('isA', { transitive : false });
+	explorer.addRelation('isA', { transitive : false, opposite : 'classOf' });
 	explorer.addNode('musical instrument');
 
 	explorer.addNode('idiophone');
@@ -48,6 +48,10 @@ document.addEventListener('DOMContentLoaded', function(evt) {
 	explorer.addLink('trumpet', 'isA', 'aerophone');
 
 	explorer.menu.applyData({
-		filterRelationToggle : false
+		filterRelation : 'isA',
+		filterRelationToggle : true
 	});
+	// need to refresh manually - should this be done
+	// when menu is updated?
+	explorer.refresh();
 });

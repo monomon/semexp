@@ -34,8 +34,6 @@
 				.datum(data)
 				.style('opacity', 0);
 
-			console.log(getIcon('connect'));
-
 			var circleRadius = 16;
 
 			this.createTool(

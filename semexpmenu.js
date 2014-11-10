@@ -7,19 +7,19 @@
 		defaultRelation : undefined,
 		filterFactRelation : undefined,
 		filterFactEntity : undefined,
-		filterFactToggle : true,
-		filterRelation : 'is',
+		filterFactToggle : false,
+		filterRelation : undefined,
 		filterRelationToggle : false
 	};
 
 	var privateData = defaultData;
 
 	semexp.menu = {
-		draw : function (data)
+		draw : function ()
 		{
 			var explorer = this.explorer;
 
-			var menuData = data || privateData;
+			var menuData = privateData;
 
 			var menuEl = d3.select('.controls')
 				.data([menuData])
@@ -60,7 +60,8 @@
 				'default fact',
 				function () {
 					explorer.refresh();
-				}
+				},
+				menuData
 			);
 
 			this.createRelationSelector(
@@ -69,7 +70,8 @@
 				'default relation',
 				function () {
 					explorer.refresh();
-				}
+				},
+				menuData
 			);
 
 			this.createFactSelector(
@@ -78,14 +80,17 @@
 				'filter fact',
 				function () {
 					explorer.refresh();
-				}
+				},
+				menuData
 			).append('input')
 				.attr('type', 'checkbox')
 				.style({'width': 15, 'flex' : 'none'})
 				.attr('name', 'filterFactToggle')
-				.on('change', this.updateCheckbox)
+				.on('change', this.updateCheckbox);
+
+			d3.select('input[name=filterFactToggle]')
 				.property('checked', function (d) {
-					return d.filterFactToggle;
+					return d[this.name];
 				});
 
 			this.createRelationSelector(
@@ -94,14 +99,20 @@
 				'filter relation',
 				function () {
 					explorer.refresh();
-				}
+				},
+				menuData
 			).append('input')
 				.attr('type', 'checkbox')
 				.style({'width': 15, 'flex' : 'none'})
 				.attr('name', 'filterRelationToggle')
 				.on('change', this.updateCheckbox)
 				.property('checked', function (d) {
-					return d.filterRelationToggle === true;
+					return d[this.name];
+				});
+
+			d3.select('input[name=filterRelationToggle]')
+				.property('checked', function (d) {
+					return d[this.name];
 				});
 
 			var buttonGroup = menuElEnter.append(elType);
@@ -127,21 +138,23 @@
 			return menuEl;
 		},
 
-		createFactSelector : function(rootElement, basename, label, buttonCallback)
+		createFactSelector : function(rootElement, basename, label, buttonCallback, data)
 		{
 			var explorer = this.explorer;
 
 			rootElement.append('label').text(label);
 			var relations = Object.keys(explorer.model.getRelations());
 
-			var select = rootElement.append('select')
+			rootElement.append('select')
 				.attr('name', basename + 'FactRelation')
 				.classed('relationSelector', true)
 				.on('change', this.updateData);
 
-			var options = d3.select('.relationSelector[name=' +
+			var select = d3.select('.relationSelector[name=' +
 				basename +
-				'FactRelation]').selectAll('option')
+				'FactRelation]');
+
+			var options = select.selectAll('option')
 				.data(relations);
 
 			options.enter()
@@ -155,19 +168,25 @@
 
 			options.exit().remove();
 
+			select.property('value', function () {
+				return data[this.name];
+			});
+
 			var entities = explorer.model.getEntities();
 
-			var select2 = rootElement.append('select')
+			rootElement.append('select')
 				.attr('name', basename + 'FactEntity')
 				.classed('entitySelector', true)
 				.on('change', this.updateData);
-
+			
 			// this is not the update selection
 			// force update all options, because
 			// data is not bound to menu data
-			var options2 = d3.select('.entitySelector[name=' +
+			var select2 = d3.select('.entitySelector[name=' +
 				basename +
-				'FactEntity]').selectAll('option')
+				'FactEntity]');
+
+			var options2 = select2.selectAll('option')
 				.data(entities);
 
 			options2.enter()
@@ -179,6 +198,10 @@
 					return d;
 				});
 
+			select2.property('value', function () {
+				return data[this.name];
+			});
+
 			rootElement.append('input')
 				.property('value', 'apply')
 				.property('type', 'button')
@@ -187,21 +210,22 @@
 			return rootElement;
 		},
 
-		createRelationSelector : function(rootElement, basename, label, changeCallback)
+		createRelationSelector : function(rootElement, basename, label, changeCallback, data)
 		{
 			var explorer = this.explorer;
 
 			var relations = Object.keys(explorer.model.getRelations());
+			var name = basename + 'Relation';
 
 			rootElement.append('label').text(label);
-			var select = rootElement.append('select')
-				.attr('name', basename + 'Relation')
+			rootElement.append('select')
+				.attr('name', name)
 				.classed('relationSelector', true)
 				.on('change', this.updateData);
 
-			d3.select('.relationSelector[name='+basename+'Relation]').selectAll('option')
-				.data(relations)
-				.enter()
+			var select = d3.select('.relationSelector[name='+name+']');
+
+			var options = select.selectAll('option').data(relations).enter()
 				.append('option')
 				.attr('value', function(d) {
 					return d;
@@ -209,6 +233,10 @@
 				.text(function(d) {
 					return d;
 				});
+
+			select.property('value', function () {
+				return data[this.name];
+			});
 
 			return rootElement;
 		},
@@ -232,7 +260,7 @@
 			for (var key in data) {
 				privateData[key] = data[key];
 			}
-			this.refresh(privateData);
+			this.refresh();
 		},
 
 		getData : function (key)
@@ -246,7 +274,7 @@
 
 		refresh : function ()
 		{
-			this.draw(privateData);
+			this.draw();
 		}
 	};
 

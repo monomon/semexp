@@ -9,22 +9,27 @@
 		filterFactEntity : undefined,
 		filterFactToggle : true,
 		filterRelation : 'is',
-		filterRelationToggle : true
+		filterRelationToggle : false
 	};
+
+	var privateData = defaultData;
 
 	semexp.menu = {
 		draw : function (data)
 		{
 			var explorer = this.explorer;
 
-			var menuEl = d3.select('body')
+			var menuData = data || privateData;
+
+			var menuEl = d3.select('.controls')
+				.data([menuData])
+				;
+
+			var menuElEnter = menuEl.enter()
 				.append('sidebar')
 				.classed('controls', true);
 
-			var menuData = data || defaultData;
-			menuEl.datum(menuData);
-
-			var form = menuEl.append('form')
+			var form = menuElEnter.append('form')
 				.on('submit', function() {
 					if (d3.event) d3.event.preventDefault();
 
@@ -50,7 +55,7 @@
 				.property('value', 'add node');
 
 			this.createFactSelector(
-				menuEl.append(elType),
+				menuElEnter.append(elType),
 				'default',
 				'default fact',
 				function () {
@@ -59,7 +64,7 @@
 			);
 
 			this.createRelationSelector(
-				menuEl.append(elType),
+				menuElEnter.append(elType),
 				'default',
 				'default relation',
 				function () {
@@ -68,7 +73,7 @@
 			);
 
 			this.createFactSelector(
-				menuEl.append(elType),
+				menuElEnter.append(elType),
 				'filter',
 				'filter fact',
 				function () {
@@ -79,10 +84,12 @@
 				.style({'width': 15, 'flex' : 'none'})
 				.attr('name', 'filterFactToggle')
 				.on('change', this.updateCheckbox)
-				.property('checked', menuData.filterFactToggle);
+				.property('checked', function (d) {
+					return d.filterFactToggle;
+				});
 
 			this.createRelationSelector(
-				menuEl.append(elType),
+				menuElEnter.append(elType),
 				'filter',
 				'filter relation',
 				function () {
@@ -93,9 +100,11 @@
 				.style({'width': 15, 'flex' : 'none'})
 				.attr('name', 'filterRelationToggle')
 				.on('change', this.updateCheckbox)
-				.property('checked', menuData.filterRelationToggle);
+				.property('checked', function (d) {
+					return d.filterRelationToggle === true;
+				});
 
-			var buttonGroup = menuEl.append(elType);
+			var buttonGroup = menuElEnter.append(elType);
 			buttonGroup.append('input')
 				.attr('type', 'button')
 				.property('value', 'save')
@@ -111,13 +120,9 @@
 					console.log(this);
 				});
 
-			menuEl.selectAll('select').each(function (data) {
-				console.log(data[this.name] = this.value);
-			});
+			// this.applyData(menuData);
 
-			console.log(menuData);
-
-			this.applyData(menuData);
+			menuEl.exit().remove();
 
 			return menuEl;
 		},
@@ -134,9 +139,12 @@
 				.classed('relationSelector', true)
 				.on('change', this.updateData);
 
-			select.selectAll('option')
-				.data(relations)
-				.enter()
+			var options = d3.select('.relationSelector[name=' +
+				basename +
+				'FactRelation]').selectAll('option')
+				.data(relations);
+
+			options.enter()
 				.append('option')
 				.attr('value', function(d) {
 					return d;
@@ -145,17 +153,24 @@
 					return d;
 				});
 
-			select.property('value', relations[0]);
+			options.exit().remove();
 
 			var entities = explorer.model.getEntities();
-			select = rootElement.append('select')
+
+			var select2 = rootElement.append('select')
 				.attr('name', basename + 'FactEntity')
 				.classed('entitySelector', true)
 				.on('change', this.updateData);
 
-			select.selectAll('option')
-				.data(entities)
-				.enter()
+			// this is not the update selection
+			// force update all options, because
+			// data is not bound to menu data
+			var options2 = d3.select('.entitySelector[name=' +
+				basename +
+				'FactEntity]').selectAll('option')
+				.data(entities);
+
+			options2.enter()
 				.append('option')
 				.attr('value', function(d) {
 					return d;
@@ -163,8 +178,6 @@
 				.text(function(d) {
 					return d;
 				});
-
-			select.property('value', entities[0]);
 
 			rootElement.append('input')
 				.property('value', 'apply')
@@ -183,9 +196,10 @@
 			rootElement.append('label').text(label);
 			var select = rootElement.append('select')
 				.attr('name', basename + 'Relation')
+				.classed('relationSelector', true)
 				.on('change', this.updateData);
 
-			select.selectAll('option')
+			d3.select('.relationSelector[name='+basename+'Relation]').selectAll('option')
 				.data(relations)
 				.enter()
 				.append('option')
@@ -196,51 +210,43 @@
 					return d;
 				});
 
-			select.property('value', relations[0]);
-
-
 			return rootElement;
 		},
 
 		// update data from a change event
 		updateData : function ()
 		{
-			var d = d3.select('.controls').datum();
-			d[this.name] = this.value;
-			d3.select('.controls').datum(d);
+			privateData[this.name] = this.value;
+			d3.select('.controls').data(privateData);
 		},
 
 		updateCheckbox : function ()
 		{
-			var d = d3.select('.controls').datum();
-			d[this.name] = this.checked;
-			this.value = this.checked;
-			d3.select('.controls').datum(d);
+			privateData[this.name] = this.checked;
+			d3.select('.controls').data([privateData]);
 		},
 
 		// apply data to controls
 		applyData : function (data)
 		{
-			var rootElement = d3.select('.controls');
 			for (var key in data) {
-				var el = rootElement.select('[name=' + key + ']');
-				el.property('value', data[key]);
+				privateData[key] = data[key];
 			}
+			this.refresh(privateData);
 		},
 
 		getData : function (key)
 		{
 			if (key) {
-				return d3.select('.controls').datum()[key];
+				return privateData[key];
 			} else {
-				return d3.select('.controls').datum();
+				return privateData;
 			}
 		},
 
 		refresh : function ()
 		{
-			d3.selectAll('.entitySelector').data(this.explorer.model.getEntities());
-			d3.selectAll('.relationSelector').data(this.explorer.model.getRelations());
+			this.draw(privateData);
 		}
 	};
 

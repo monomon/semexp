@@ -11,7 +11,7 @@ body > svg
 	margin : 0;
 }
 
-body, input, select
+body, input, select, label
 {
 	font: 14px "FreeSans", Helvetica, Arial, sans-serif;
 }

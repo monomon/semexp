@@ -57,7 +57,6 @@
 			}
 
 			for (var relationName in relations) {
-				console.log(relationName);
 				nodes.forEach(function (node) {
 					var result = db.q();
 					result = result.filter(relationName, node.name);
@@ -107,9 +106,9 @@
 		},
 
 		// some simple wrapper functions
-		add : function(nodeName)
+		add : function(nodeName, options)
 		{
-			db.add(nodeName);
+			db.add(nodeName, options);
 		},
 
 		fact : function(from, relation, to)

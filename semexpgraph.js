@@ -58,7 +58,6 @@
 			var text = label
 				.append('text')
 				.text(function (d) {
-					console.log(d);
 					return d.name;
 				})
 				.attr('text-anchor', 'middle')

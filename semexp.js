@@ -54,15 +54,18 @@ an experiment in navigating semantic networks
 			this.refresh();
 		}},
 
+		addRelation : { value : function(relName, options)
+		{
+			this.model.add(relName, options);
+			this.refresh();
+		}},
+
 		addLink : { value : function(from, link, to)
 		{
 			if (from == to) {
 				return;
 			}
 
-			console.log(from);
-			console.log(link);
-			console.log(to);
 			this.model.fact(from, link, to);
 			this.tools.setData('fromNode', null);
 			// append link to the data?
@@ -85,8 +88,7 @@ an experiment in navigating semantic networks
 		draw : { value : function()
 		{
 			// clean svg
-			this.menu.draw();
-			this.svg.selectAll('*').remove();
+			// this.svg.selectAll('*').remove();
 			this.graph.draw(
 				this.model.generateGraph(),
 				this.svg,
@@ -102,6 +104,7 @@ an experiment in navigating semantic networks
 
 		load : { value : function(data)
 		{
+			this.menu.draw();
 			this.model.loadData(data);
 			this.draw();
 		}}

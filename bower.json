@@ -1,0 +1,22 @@
+{
+  "name": "semexp",
+  "version": "0.1.0",
+  "homepage": "https://github.com/monomon/semexp",
+  "authors": [
+    "Mois Moshev <mois@monomon.me>"
+  ],
+  "description": "Semantic explorer. Visualize semantic networks in force-directed graphs",
+  "main": "semexp.js",
+  "keywords": [
+    "semantic",
+    "svg",
+    "visualization",
+    "graph"
+  ],
+  "license": "LGPL3",
+  "dependencies": {
+    "d3": "~3.5.5",
+    "semnet": "git://github.com/asciimoo/semnet.git",
+    "Icons": "git://github.com/PicolSigns/Icons.git"
+  }
+}

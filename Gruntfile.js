@@ -15,7 +15,7 @@ module.exports = function (grunt) {
 					'document' : true,
 				}
 			},
-			beforeconcat : ['src/*.js']
+			beforeconcat : ['src/js/*.js']
 		},
 		uglify: {
 			options : {
@@ -23,13 +23,13 @@ module.exports = function (grunt) {
 			},
 			build : {
 				src : [
-					'src/semexp.js',
-					'src/semexpgraph.js',
-					'src/semexpmenu.js',
-					'src/semexpmodel.js',
-					'src/semexptools.js'
+					'src/js/semexp.js',
+					'src/js/semexpgraph.js',
+					'src/js/semexpmenu.js',
+					'src/js/semexpmodel.js',
+					'src/js/semexptools.js'
 				],
-				dest : 'build/semexp.min.js'
+				dest : 'build/js/semexp.min.js'
 			}
 		},
 		// package for deployment
@@ -38,24 +38,13 @@ module.exports = function (grunt) {
 				files: [{
 					expand: true,
 					flatten: true,
-					src : ['src/demo.js'],
-					dest : 'build/'
+					src : ['src/js/demo.js'],
+					dest : 'build/js/'
 				}, {
 					expand: true,
 					flatten: true,
-					src: [
-						'bower_components/d3/d3.min.js',
-						'bower_components/semnet/semnet.js'
-					],
-					dest: 'build/vendor/'
-				}, {
-					expand: true,
-					src: ['style.css'],
-					dest: 'dist'
-				}, {
-					expand: true,
-					src: ['doc/**'],
-					dest: 'dist'
+					src: ['src/style.css'],
+					dest: 'build/'
 				}]
 			},
 
@@ -63,17 +52,21 @@ module.exports = function (grunt) {
 				files : [{
 					expand : true,
 					flatten : true,
-					src : ['build/*.js'],
+					src : ['build/js/*'],
 					dest : 'dist/js/'
 				}, {
 					expand: true,
-					src: ['style.css'],
-					dest: 'dist/css'
+					flatten: true,
+					src: ['build/style.css'],
+					dest: 'dist/'
 				}, {
 					expand: true,
-					flatten : true,
-					src: ['build/vendor'],
-					dest: 'dist/vendor'
+					flatten: true,
+					src: [
+						'bower_components/d3/d3.min.js',
+						'bower_components/semnet/semnet.js'
+					],
+					dest: 'dist/vendor/'
 				}]
 			}
 		},
@@ -86,7 +79,7 @@ module.exports = function (grunt) {
 
 		jsdoc : {
 			default : {
-				src : 'src/*.js',
+				src : 'src/js/*.js',
 				dest : 'doc'
 			}
 		},
@@ -124,8 +117,9 @@ module.exports = function (grunt) {
 
 	grunt.registerTask('build', [
 		'jshint:beforeconcat',
-		'karma',
+		// 'karma',
 		// 'jsdoc',
+		'copy:build',
 		'uglify',
 		'processhtml:build'
 	]);

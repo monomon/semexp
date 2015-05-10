@@ -1,0 +1,1019 @@
+{
+	"auto_complete":
+	{
+		"selected_items":
+		[
+			[
+				"filterRe",
+				"filterRelationToggle"
+			],
+			[
+				"report",
+				"ReportSelf"
+			],
+			[
+				"for",
+				"fori	for i,v in ipairs()"
+			],
+			[
+				"selected",
+				"selected_unit"
+			],
+			[
+				"screen",
+				"screenHeight"
+			],
+			[
+				"suspe",
+				"suspendIO"
+			],
+			[
+				"register",
+				"registerIO"
+			]
+		]
+	},
+	"buffers":
+	[
+		{
+			"file": "public/semexp/testpage.html",
+			"settings":
+			{
+				"buffer_size": 473,
+				"line_ending": "Unix"
+			}
+		},
+		{
+			"file": "public/semexp/testpage.js",
+			"settings":
+			{
+				"buffer_size": 1543,
+				"line_ending": "Unix"
+			}
+		},
+		{
+			"file": "public/semexp/style.css",
+			"settings":
+			{
+				"buffer_size": 2171,
+				"line_ending": "Unix"
+			}
+		},
+		{
+			"file": "public/semexp/semexpmodel.js",
+			"settings":
+			{
+				"buffer_size": 2813,
+				"line_ending": "Unix"
+			}
+		},
+		{
+			"file": "public/semexp/semexpmenu.js",
+			"settings":
+			{
+				"buffer_size": 6178,
+				"line_ending": "Unix"
+			}
+		},
+		{
+			"file": "public/semexp/semexptools.js",
+			"settings":
+			{
+				"buffer_size": 6486,
+				"line_ending": "Unix"
+			}
+		},
+		{
+			"file": "public/semexp/semexpgraph.js",
+			"settings":
+			{
+				"buffer_size": 4713,
+				"line_ending": "Unix"
+			}
+		},
+		{
+			"file": "public/semexp/semexp.js",
+			"settings":
+			{
+				"buffer_size": 2799,
+				"line_ending": "Unix"
+			}
+		}
+	],
+	"build_system": "Packages/User/kom.sublime-build",
+	"command_palette":
+	{
+		"height": 201.0,
+		"selected_items":
+		[
+			[
+				"diff",
+				"Git: Diff"
+			],
+			[
+				"status",
+				"Git: Status"
+			],
+			[
+				"close",
+				"File: Close All"
+			],
+			[
+				"git push",
+				"Git: Push"
+			],
+			[
+				"push",
+				"Git: Push Current Branch"
+			],
+			[
+				"closae",
+				"File: Close All"
+			],
+			[
+				"git",
+				"Git: Status"
+			],
+			[
+				"diff cahc",
+				"Git: Diff Cached"
+			],
+			[
+				"trailing",
+				"Trailing Spaces: Delete Trailing Spaces"
+			],
+			[
+				"commit",
+				"Git: Commit"
+			],
+			[
+				"path",
+				"JSHint: Set `node` Path"
+			],
+			[
+				"lint",
+				"SublimeLinter: Lint This View"
+			],
+			[
+				"statu",
+				"Git: Status"
+			],
+			[
+				"dif",
+				"Git: Diff"
+			],
+			[
+				"traili",
+				"Trailing Spaces: Delete Trailing Spaces"
+			],
+			[
+				"close all",
+				"File: Close All"
+			],
+			[
+				"git status",
+				"Git: Status"
+			],
+			[
+				"install",
+				"Package Control: Install Package"
+			],
+			[
+				"Package Control: instal",
+				"Package Control: Install Package"
+			],
+			[
+				"instal",
+				"Package Control: Install Package"
+			]
+		],
+		"width": 476.0
+	},
+	"console":
+	{
+		"height": 139.0,
+		"history":
+		[
+			"import os; os.getenv('PATH')"
+		]
+	},
+	"distraction_free":
+	{
+		"menu_visible": true,
+		"show_minimap": false,
+		"show_open_files": false,
+		"show_tabs": false,
+		"side_bar_visible": false,
+		"status_bar_visible": false
+	},
+	"expanded_folders":
+	[
+		"/mnt/data/Projects/semexp",
+		"/mnt/data/Projects/semexp/public",
+		"/mnt/data/Projects/semexp/public/3p",
+		"/mnt/data/Projects/semexp/public/3p/semnet",
+		"/mnt/data/Projects/semexp/public/semexp",
+		"/mnt/data/Projects/semexp/public/semexp/deps",
+		"/mnt/data/Projects/semexp/views"
+	],
+	"file_history":
+	[
+		"/mnt/data/Projects/semexp/node_modules/jade/node_modules/transformers/node_modules/uglify-js/node_modules/optimist/example/usage-options.js",
+		"/mnt/data/Projects/semexp/public/3p/d3/test/math/transform-rotate-origin-test.html",
+		"/mnt/data/Projects/semexp/public/semexp/style.css",
+		"/mnt/data/Projects/semexp/public/3p/semnet/semnet.js",
+		"/mnt/data/Projects/semexp/archive/drawGraph.js",
+		"/mnt/data/Projects/semexp/public/3p/d3/src/geo/greatArc.js",
+		"/mnt/data/Projects/semexp/node_modules/body-parser/node_modules/iconv-lite/encodings/tables/gb18030-ranges.json",
+		"/mnt/data/Projects/semexp/public/3p/PicolSigns/picol_latest_prerelease_svg/globe.svg",
+		"/mnt/data/Projects/semexp/semexp.sublime-project",
+		"/mnt/data/Projects/semexp/public/3p/PicolSigns/picol_latest_prerelease_svg/server_edit.svg",
+		"/mnt/data/Projects/pe666o/kom_lua/src/kom.engine.lua",
+		"/mnt/data/Projects/pe666o/kom_lua/src/kom.engine.text.lua",
+		"/mnt/data/Projects/pe666o/kom_lua/src/archive/kom_player.lua",
+		"/mnt/data/Projects/pe666o/kom_lua/src/kom.engine.viewport.lua",
+		"/mnt/data/Projects/pe666o/kom_lua/src/kom.game.lua",
+		"/mnt/data/Projects/pe666o/kom_lua/src/kom.player.lua",
+		"/mnt/data/Projects/pe666o/kom_lua/src/kom.unit.lua",
+		"/mnt/data/Projects/pe666o/kom_lua/src/kom.networkplayer.test.lua",
+		"/mnt/data/Projects/pe666o/kom_lua/src/kom.menu.lua",
+		"/mnt/data/Projects/pe666o/kom_lua/src/kom.lua",
+		"/mnt/data/Projects/pe666o/kom_lua/src/kom.engine.prop.lua",
+		"/mnt/data/Projects/pe666o/kom_lua/src/kom.engine.texture.lua",
+		"/mnt/data/Projects/pe666o/kom_lua/src/kom.engine.layer.lua",
+		"/mnt/data/Projects/pe666o/kom_lua/src/kom.engine.io.hid.lua",
+		"/mnt/data/Projects/pe666o/kom_lua/src/server/http/index.js",
+		"/mnt/data/Projects/pe666o/kom_lua/src/server/socket/logger.js",
+		"/mnt/data/Projects/pe666o/kom_lua/stages/level0.map.lua",
+		"/mnt/data/Projects/pe666o/kom_lua/src/kom.contextmgr.lua",
+		"/mnt/data/Projects/pe666o/kom_lua/src/kom.player.cursor.lua",
+		"/mnt/data/Projects/pe666o/kom_lua/src/kom.stage.lua",
+		"/mnt/data/Projects/pe666o/kom_lua/src/archive/kom_control.lua",
+		"/mnt/data/Projects/pe666o/kom_lua/config.lua",
+		"/mnt/data/Projects/pe666o/kom_lua/art/healer.svg",
+		"/mnt/data/Projects/pe666o/kom_lua/src/kom.menu.test.lua",
+		"/mnt/data/Projects/pe666o/kom_lua/src/kom.client.socket.lua",
+		"/home/monomon/Projects/pe666o/kom_lua/src/kom.player.lua",
+		"/home/monomon/Projects/pe666o/kom_lua/src/kom.player.cursor.lua",
+		"/home/monomon/Projects/pe666o/kom_lua/src/kom.game.lua",
+		"/home/monomon/Projects/pe666o/kom_lua/src/kom.lua",
+		"/home/monomon/Projects/pe666o/kom_lua/src/kom.stage.lua",
+		"/home/monomon/Projects/pe666o/kom_lua/src/kom.unit.lua",
+		"/home/monomon/Projects/pe666o/kom_lua/src/kom.engine.lua",
+		"/home/monomon/Projects/pe666o/kom_lua/src/kom.client.socket.lua",
+		"/home/monomon/Projects/pe666o/kom_lua/res/kom.res.sprites.lua",
+		"/home/monomon/Projects/pe666o/kom_lua/src/kom.engine.prop.lua",
+		"/home/monomon/Projects/pe666o/kom_lua/src/kom.engine.texture.lua",
+		"/home/monomon/Projects/pe666o/kom_lua/src/archive/kom_player.lua",
+		"/home/monomon/Projects/pe666o/kom_lua/kom.sublime-project",
+		"/home/monomon/Projects/pe666o/kom_lua/src/kom.menu.lua",
+		"/home/monomon/Projects/pe666o/kom_lua/src/kom.engine.layer.lua",
+		"/home/monomon/Projects/pe666o/kom_lua/src/kom.player.test.lua",
+		"/home/monomon/Projects/pe666o/kom_lua/src/server/socket/logger.js",
+		"/home/monomon/Projects/pe666o/kom_lua/stages/level0.map.lua",
+		"/home/monomon/Projects/pe666o/kom_lua/src/server/socket/server.js",
+		"/home/monomon/Projects/pe666o/kom_lua/src/server/socket/socket_test.sh",
+		"/home/monomon/Projects/pe666o/kom_lua/src/server/socket/socket_client.lua",
+		"/home/monomon/Projects/pe666o/kom_lua/src/kom.client.socket.test.lua",
+		"/home/monomon/Projects/pe666o/kom_lua/src/kom.engine.viewport.lua",
+		"/home/monomon/Projects/pe666o/kom_lua/src/kom.menu.test.lua",
+		"/home/monomon/.config/sublime-text-3/Packages/JSHint Gutter/JSHint.sublime-settings",
+		"/home/monomon/.config/sublime-text-3/Packages/SublimeGit/SublimeGit.sublime-settings",
+		"/home/monomon/.config/sublime-text-3/Packages/User/kom.sublime-build",
+		"/home/monomon/Projects/pe666o/kom_lua/src/archive/lib.lua",
+		"/home/monomon/Projects/pe666o/kom_lua/res/mage64.pdn",
+		"/home/monomon/Projects/pe666o/kom_lua/src/archive/kom_map_theme_test2.lua",
+		"/home/monomon/Projects/pe666o/kom_lua/src/archive/kom_map_theme_test1.lua",
+		"/home/monomon/Projects/pe666o/kom_lua/src/archive/kom_map_test2.lua",
+		"/home/monomon/Projects/pe666o/kom_lua/src/archive/kom_map_test1.lua",
+		"/home/monomon/Projects/pe666o/kom_lua/src/kom.engine.anim.lua",
+		"/home/monomon/Projects/pe666o/kom_lua/src/kom.engine.text.lua",
+		"/home/monomon/Projects/pe666o/kom_lua/src/kom.engine.io.hid.lua",
+		"/home/monomon/Projects/pe666o/kom_lua/src/kom.unit.range.lua",
+		"/home/monomon/Projects/pe666o/kom_lua/src/kom.stage.test.lua",
+		"/home/monomon/Projects/pe666o/kom_lua/art/archer.svg",
+		"/home/monomon/Projects/pe666o/kom_lua/config.game.lua",
+		"/home/monomon/Projects/pe666o/kom_lua/src/archive/kom_game.lua",
+		"/home/monomon/Projects/pe666o/kom_lua/src/archive/kom_anim.lua",
+		"/home/monomon/Projects/pe666o/kom_lua/src/archive/animation.lua",
+		"/home/monomon/Projects/pe666o/kom_lua/src/archive/inspect.lua",
+		"/home/monomon/Projects/pe666o/kom_lua/test_classes.sh",
+		"/home/monomon/Projects/pe666o/kom_lua/TRASH.txt",
+		"/home/monomon/Projects/pe666o/kom_lua/config.lua",
+		"/home/monomon/Projects/pe666o/kom_lua/start_kom.sh",
+		"/home/monomon/Projects/pe666o/kom_lua/src/kom.networkplayer.test.lua",
+		"/home/monomon/Projects/pe666o/kom_lua/notes.txt",
+		"/home/monomon/Projects/pe666o/kom_lua/src/kom.client.http.lua",
+		"/home/monomon/Projects/pe666o/kom_lua/src/archive/client.lua",
+		"/home/monomon/Projects/pe666o/kom_lua/src/archive/kom_unit.lua",
+		"/home/monomon/Projects/pe666o/kom_lua/src/utils.lua",
+		"/home/monomon/Projects/pe666o/kom_lua/res/menu_item.png",
+		"/home/monomon/Projects/pe666o/kom_lua/src/archive/GARBAGE.lua",
+		"/home/monomon/Projects/pe666o/kom_lua/kom.sh",
+		"/home/monomon/Projects/pe666o/kom_lua/src/kom.httpclient.lua",
+		"/home/monomon/Projects/pe666o/kom_lua/src/server/server.js",
+		"/home/monomon/Projects/pe666o/kom_lua/src/sockettest.lua",
+		"/home/monomon/Projects/pe666o/kom_lua/src/server/index.js",
+		"/home/monomon/Projects/pe666o/kom_lua/src/server/wsserver.js",
+		"/home/monomon/Projects/ll/pres/pres.html",
+		"/home/monomon/Projects/pe666o/kom_lua/res/tiles_commands.pdn",
+		"/home/monomon/Projects/pe666o/kom_lua/res/tiles_range.pdn",
+		"/home/monomon/Projects/pe666o/kom_lua/res/tile_range.pdn",
+		"/home/monomon/.config/sublime-text-3/Packages/User/SublimeGit.sublime-settings",
+		"/home/monomon/.config/sublime-text-3/Packages/Default/Preferences.sublime-settings",
+		"/home/monomon/.config/sublime-text-3/Packages/User/Preferences.sublime-settings",
+		"/home/monomon/Projects/pe666o/kom_lua/res/explosion64.pdn",
+		"/home/monomon/extract_profile.sh",
+		"/opt/sublime_text/changelog.txt"
+	],
+	"find":
+	{
+		"height": 35.0
+	},
+	"find_in_files":
+	{
+		"height": 93.0,
+		"where_history":
+		[
+			"<open folders>,-src/archive",
+			"<open files>,-src/archive",
+			"<open files>,src/archive",
+			"<open folders><exclude src/archive>",
+			"<open folders - src/archive>",
+			"<open folders>",
+			"",
+			"src/",
+			"<open folders>"
+		]
+	},
+	"find_state":
+	{
+		"case_sensitive": false,
+		"find_history":
+		[
+			"enter",
+			"menuElEnter",
+			"check",
+			"FactEntity",
+			"menuEl",
+			"check",
+			"select",
+			"menuEl",
+			"select",
+			"datum",
+			"change",
+			"'is'",
+			"idiophone",
+			"xylophone",
+			"idiophone",
+			"xylophone",
+			"console",
+			"priority",
+			"100",
+			"priority",
+			"tileset",
+			"priorit",
+			"font",
+			"text",
+			"menuitem",
+			"heal",
+			"stop",
+			"suspendIO",
+			",\n",
+			"stop",
+			"exit",
+			"stop",
+			"full",
+			"fullscreen",
+			"enterFullscreen",
+			"registerio",
+			"unit",
+			"props",
+			"stop",
+			"execComm",
+			"registerio",
+			"defaultConfig",
+			"KOMgame",
+			"game",
+			"callbacksIOpointer",
+			"layers",
+			"[i]",
+			"i",
+			"suspendio",
+			"showmenu",
+			"'select",
+			"units",
+			"fromGrid",
+			"toGrid",
+			"gridSize",
+			"getGridSize",
+			"GRID_SIZE",
+			"GRID",
+			"gameConfig",
+			"self.",
+			"gameConfig",
+			"type",
+			"gameConfig",
+			"GRID_SIZE",
+			"cell_size",
+			"engine.",
+			"action",
+			"execactio",
+			"action",
+			"gridsiz",
+			"stage",
+			"gui.map",
+			"todo",
+			"attack",
+			"5",
+			"select",
+			"hide",
+			"cursor.GetAction()",
+			"prop",
+			" + ",
+			"attack",
+			"0.9",
+			"position",
+			"unit",
+			"die",
+			"heal",
+			"heal'",
+			"heal",
+			"ap'",
+			"end",
+			"select",
+			"heal'",
+			"heal",
+			"spendAP",
+			"modifyprop",
+			"health",
+			"specialhealthbar",
+			"specialapbar",
+			"specialapba",
+			"1",
+			"heal",
+			"action",
+			"onDrawAP",
+			"health",
+			"specialhealthbar",
+			"health",
+			"specialhealthbar",
+			"health",
+			"onend",
+			"ap\\b",
+			"unit",
+			"attack",
+			"die",
+			"select",
+			"self.id",
+			"select",
+			"isfriend",
+			"addunit",
+			"remove",
+			"self.units",
+			"execcomman",
+			"execaction",
+			"damage",
+			"kill",
+			"cursor",
+			"cusor",
+			"execaction",
+			"select"
+		],
+		"highlight": true,
+		"in_selection": false,
+		"preserve_case": false,
+		"regex": false,
+		"replace_history":
+		[
+			"Changes",
+			"logger.debug",
+			"// logger",
+			"logger.log",
+			"\\t",
+			"}, {",
+			"\\r",
+			"^10",
+			"\\r"
+		],
+		"reverse": false,
+		"show_context": true,
+		"use_buffer2": true,
+		"whole_word": false,
+		"wrap": true
+	},
+	"groups":
+	[
+		{
+			"selected": 4,
+			"sheets":
+			[
+				{
+					"buffer": 0,
+					"file": "public/semexp/testpage.html",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 473,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								473,
+								473
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/HTML/HTML.tmLanguage",
+							"translate_tabs_to_spaces": false
+						},
+						"translation.x": 0.0,
+						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 4,
+					"type": "text"
+				},
+				{
+					"buffer": 1,
+					"file": "public/semexp/testpage.js",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 1543,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								1517,
+								1517
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/JavaScript/JavaScript.tmLanguage"
+						},
+						"translation.x": 0.0,
+						"translation.y": 161.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 3,
+					"type": "text"
+				},
+				{
+					"buffer": 2,
+					"file": "public/semexp/style.css",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 2171,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								130,
+								130
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/CSS/CSS.tmLanguage",
+							"translate_tabs_to_spaces": false
+						},
+						"translation.x": 0.0,
+						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 2,
+					"type": "text"
+				},
+				{
+					"buffer": 3,
+					"file": "public/semexp/semexpmodel.js",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 2813,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								1397,
+								1397
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/JavaScript/JavaScript.tmLanguage",
+							"translate_tabs_to_spaces": false
+						},
+						"translation.x": 0.0,
+						"translation.y": 582.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 1,
+					"type": "text"
+				},
+				{
+					"buffer": 4,
+					"file": "public/semexp/semexpmenu.js",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 6178,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								2104,
+								2104
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/JavaScript/JavaScript.tmLanguage",
+							"translate_tabs_to_spaces": false
+						},
+						"translation.x": 0.0,
+						"translation.y": 3625.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 0,
+					"type": "text"
+				},
+				{
+					"buffer": 5,
+					"file": "public/semexp/semexptools.js",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 6486,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								733,
+								733
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/JavaScript/JavaScript.tmLanguage",
+							"translate_tabs_to_spaces": false
+						},
+						"translation.x": 0.0,
+						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 7,
+					"type": "text"
+				},
+				{
+					"buffer": 6,
+					"file": "public/semexp/semexpgraph.js",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 4713,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								1364,
+								1364
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/JavaScript/JavaScript.tmLanguage",
+							"translate_tabs_to_spaces": false
+						},
+						"translation.x": 0.0,
+						"translation.y": 548.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 5,
+					"type": "text"
+				},
+				{
+					"buffer": 7,
+					"file": "public/semexp/semexp.js",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 2799,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								2210,
+								2210
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/JavaScript/JavaScript.tmLanguage",
+							"translate_tabs_to_spaces": false
+						},
+						"translation.x": 0.0,
+						"translation.y": 1173.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 6,
+					"type": "text"
+				}
+			]
+		}
+	],
+	"incremental_find":
+	{
+		"height": 25.0
+	},
+	"input":
+	{
+		"height": 33.0
+	},
+	"layout":
+	{
+		"cells":
+		[
+			[
+				0,
+				0,
+				1,
+				1
+			]
+		],
+		"cols":
+		[
+			0.0,
+			1.0
+		],
+		"rows":
+		[
+			0.0,
+			1.0
+		]
+	},
+	"menu_visible": true,
+	"output.exec":
+	{
+		"height": 112.0
+	},
+	"output.find_results":
+	{
+		"height": 0.0
+	},
+	"output.git-commit":
+	{
+		"height": 112.0
+	},
+	"output.git-push":
+	{
+		"height": 112.0
+	},
+	"project": "semexp.sublime-project",
+	"replace":
+	{
+		"height": 64.0
+	},
+	"save_all_on_build": true,
+	"select_file":
+	{
+		"height": 0.0,
+		"selected_items":
+		[
+			[
+				"tools",
+				"public/semexp/semexptools.js"
+			],
+			[
+				"semgraph",
+				"public/semexp/semexpgraph.js"
+			],
+			[
+				"semnet",
+				"public/3p/semnet/semnet.js"
+			],
+			[
+				"text",
+				"src/kom.engine.text.lua"
+			],
+			[
+				"engine.lua",
+				"src/kom.engine.lua"
+			],
+			[
+				"kom.lua",
+				"src/kom.lua"
+			],
+			[
+				"prop.",
+				"src/kom.engine.prop.lua"
+			],
+			[
+				"unit",
+				"src/kom.unit.lua"
+			],
+			[
+				"engine",
+				"src/kom.engine.lua"
+			],
+			[
+				"player",
+				"src/kom.player.lua"
+			],
+			[
+				"game",
+				"src/kom.game.lua"
+			],
+			[
+				"viewpor",
+				"src/kom.engine.viewport.lua"
+			],
+			[
+				"prop",
+				"src/kom.engine.prop.lua"
+			],
+			[
+				"viewport",
+				"src/kom.engine.viewport.lua"
+			],
+			[
+				"hid",
+				"src/kom.engine.io.hid.lua"
+			],
+			[
+				"menu",
+				"src/kom.menu.lua"
+			],
+			[
+				"texture",
+				"src/kom.engine.texture.lua"
+			],
+			[
+				"layer",
+				"src/kom.engine.layer.lua"
+			],
+			[
+				"contextm",
+				"src/kom.contextmgr.lua"
+			],
+			[
+				"context",
+				"src/kom.contextmgr.lua"
+			],
+			[
+				"menu.",
+				"src/kom.menu.lua"
+			],
+			[
+				"stage",
+				"src/kom.stage.lua"
+			],
+			[
+				"cursor",
+				"src/kom.player.cursor.lua"
+			],
+			[
+				"player.",
+				"src/kom.player.lua"
+			],
+			[
+				"plaer",
+				"src/archive/kom_player.lua"
+			],
+			[
+				"cusro",
+				"src/kom.player.cursor.lua"
+			],
+			[
+				"sprites",
+				"res/kom.res.sprites.lua"
+			],
+			[
+				"logger",
+				"src/server/socket/logger.js"
+			],
+			[
+				"socket",
+				"src/kom.client.socket.lua"
+			],
+			[
+				"menu.test",
+				"src/kom.menu.test.lua"
+			],
+			[
+				"kom.ula",
+				"src/kom.lua"
+			],
+			[
+				"map",
+				"stages/level0.map.lua"
+			],
+			[
+				"anim",
+				"src/kom.engine.anim.lua"
+			],
+			[
+				"game.lua",
+				"src/kom.game.lua"
+			],
+			[
+				"io",
+				"src/kom.engine.io.hid.lua"
+			],
+			[
+				"engine.text",
+				"src/kom.engine.text.lua"
+			],
+			[
+				"game.",
+				"src/kom.game.lua"
+			],
+			[
+				"status",
+				"src/kom.stage.test.lua"
+			],
+			[
+				"kom.",
+				"src/kom.lua"
+			],
+			[
+				"netwrok",
+				"src/kom.networkplayer.test.lua"
+			],
+			[
+				"server",
+				"src/server/socket/server.js"
+			],
+			[
+				"client",
+				"src/kom.client.socket.lua"
+			],
+			[
+				"unit.",
+				"src/kom.unit.lua"
+			],
+			[
+				"ply",
+				"src/archive/kom_player.lua"
+			],
+			[
+				"game.lu",
+				"src/kom.game.lua"
+			]
+		],
+		"width": 0.0
+	},
+	"select_project":
+	{
+		"height": 500.0,
+		"selected_items":
+		[
+			[
+				"",
+				"~/Projects/mmcosmetics/automation/mmcosmetics.sublime-project"
+			]
+		],
+		"width": 380.0
+	},
+	"select_symbol":
+	{
+		"height": 0.0,
+		"selected_items":
+		[
+		],
+		"width": 0.0
+	},
+	"selected_group": 0,
+	"settings":
+	{
+	},
+	"show_minimap": true,
+	"show_open_files": true,
+	"show_tabs": true,
+	"side_bar_visible": true,
+	"side_bar_width": 302.0,
+	"status_bar_visible": true,
+	"template_settings":
+	{
+	}
+}

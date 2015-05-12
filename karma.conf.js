@@ -5,7 +5,7 @@ module.exports = function(config)
 		files : [
 			'bower_components/d3/d3.min.js',
 			'bower_components/semnet/semnet.js',
-			'src/*.js',
+			'src/js/*.js',
 			'test/*.js'
 		]
 	});

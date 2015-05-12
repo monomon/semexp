@@ -62,11 +62,19 @@ module.exports = function (grunt) {
 				}, {
 					expand: true,
 					flatten: true,
+					cwd : 'bower_components',
 					src: [
-						'bower_components/d3/d3.min.js',
-						'bower_components/semnet/semnet.js'
+						'd3/d3.min.js',
+						'semnet/semnet.js'
 					],
 					dest: 'dist/vendor/'
+				}, {
+					expand: true,
+					cwd : 'bower_components',
+					src: [
+						'Icons/**'
+					],
+					dest : 'dist/vendor/'
 				}]
 			}
 		},
@@ -104,6 +112,19 @@ module.exports = function (grunt) {
 					'dist/index.html' : ['build/index.html']
 				}
 			}
+		},
+
+		// use replace only for the icon path in the javascript file,
+		// the rest is handled by processhtml
+		replace : {
+			dist : {
+				src : ['dist/js/semexp.min.js'],
+				overwrite : true,
+				replacements : [{
+					from : '../bower_components',
+					to : 'vendor'
+				}]
+			}
 		}
 	});
 
@@ -111,6 +132,7 @@ module.exports = function (grunt) {
 	grunt.loadNpmTasks('grunt-contrib-uglify');
 	grunt.loadNpmTasks('grunt-contrib-copy');
 	grunt.loadNpmTasks('grunt-contrib-clean');
+	grunt.loadNpmTasks('grunt-text-replace');
 	grunt.loadNpmTasks('grunt-jsdoc');
 	grunt.loadNpmTasks('grunt-karma');
 	grunt.loadNpmTasks('grunt-processhtml');
@@ -126,6 +148,7 @@ module.exports = function (grunt) {
 
 	grunt.registerTask('dist', [
 		'processhtml:dist',
-		'copy:dist'
+		'copy:dist',
+		'replace:dist'
 	]);
 };

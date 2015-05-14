@@ -40,7 +40,6 @@
 	 * graph tools.
 	 * These appear on nodes as circles with icons
 	 * that can be interacted with
-	 * 
 	 */
 	semexp.tools = {
 
@@ -228,7 +227,7 @@
 						data.fromNode != data.toNode &&
 						data.linkType) {
 
-						explorer.addLink(data.fromNode.name, data.linkType, data.toNode.name);
+						explorer.addFact(data.fromNode.name, data.linkType, data.toNode.name);
 						console.log('connecting (!)');
 					}
 

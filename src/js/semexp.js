@@ -82,7 +82,7 @@
 		 * @param {String} link Relation id
 		 * @param {String} to Target node id
 		 */
-		addLink : function(from, link, to)
+		addFact : function(from, link, to)
 		{
 			if (from == to) {
 				return;

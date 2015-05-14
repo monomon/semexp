@@ -1,13 +1,38 @@
 (function (semexp) {
 	'use strict';
 	semexp.graph = {
-		// radius calc function - depends on number of relations
-		// make this configurable somehow...
-		getRadius : function(d)
-		{
-			return Math.round(Math.log(d.relations+1)*15 + 40);
+
+		radiusBase : 40,
+		radiusMultiplier : 15,
+
+		layoutProps : {
+			linkStrength : 0.6,
+			distance : 200,
+			friction : 0.9,
+			charge : -300,
+			gravity : 0.02,
+			theta : 0.9,
+			alpha : 0.7
 		},
 
+		/**
+		 * radius calc function - depends on number of relations
+		 * @todo: make this configurable
+		 * @param {Object} d Data object for which to calculate the radius
+		 * @return {Number} radius
+		 */
+		getRadius : function(d)
+		{
+			return Math.round(Math.log(d.relations+1)*semexp.graph.radiusMultiplier + semexp.graph.radiusBase);
+		},
+
+		/**
+		 * Draw the graph nodes
+		 * @param {Array} nodes The node data for all nodes
+		 * @param {SVGGroup} layer The layer to append the node to
+		 * @param {Function} dragFunc 
+		 * @return {d3.selection} update selection
+		 */
 		drawNodes : function(nodes, layer, dragFunc)
 		{
 			layer.selectAll('.node').remove();
@@ -41,6 +66,12 @@
 			return node;
 		},
 
+		/**
+		 * Draw all links in the graph
+		 * @param {Array} links Data for all links
+		 * @param {SVGGroup} layer The svg element to append to
+		 * @return {d3.selection} update selection
+		 */
 		drawLinks : function(links, layer)
 		{
 			layer.selectAll('.link').remove();
@@ -82,6 +113,13 @@
 			return link;
 		},
 
+		/**
+		 * Connect all event listeners for nodes.
+		 * These include drag'n'drop, etc.
+		 * @param {Element} subject Element to add listener to
+		 * @param {String} eventName
+		 * @return {}
+		 */
 		hookHandler : function(subject, eventName)
 		{
 			var explorer = this.explorer;
@@ -109,16 +147,22 @@
 			return subject.on(eventName, eventSwitch[eventName]);
 		},
 
+		/**
+		 * Draw the graph in a force directed layout
+		 * @param {Object} graph object, consisting of nodes and links
+		 * @param {SVGElement} svg Base svg element
+		 * @param {Array} tickComponents Entities that need to be updated on every tick; they have an update method
+		 */
 		draw : function(graph, svg, tickComponents)
 		{
 			this.force = d3.layout.force()
-				.linkStrength(0.6)
-				.distance(200)
-				.friction(0.9)
-				.charge(-200)
-				.gravity(0.02)
-				.theta(0.9)
-				.alpha(0.7)
+				.linkStrength(this.layoutProps.linkStrength)
+				.distance(this.layoutProps.distance)
+				.friction(this.layoutProps.friction)
+				.charge(this.layoutProps.charge)
+				.gravity(this.layoutProps.gravity)
+				.theta(this.layoutProps.theta)
+				.alpha(this.layoutProps.alpha)
 				.size([svg.property('width').baseVal.value, svg.property('height').baseVal.value]);
 
 			var defs = svg.append('defs');
@@ -142,7 +186,13 @@
 			this.refresh(graph, tickComponents);
 		},
 
-		// todo: find out how to add nodes and links wihtout rebinding to force, etc.
+		/**
+		 * Refresh the graph
+		 * @todo: find out how to add nodes and links wihtout rebinding to force, etc.
+		 * @param {Object} graph object, consisting of nodes and links
+		 * @param {SVGElement} svg Base svg element
+		 * @param {Array} tickComponents Entities that need to be updated on every 
+		 */
 		refresh : function(graph, tickComponents)
 		{
 			var link = this.drawLinks(graph.links, this.layers.links);
@@ -179,6 +229,9 @@
 			});
 		},
 
+		/**
+		 * Prevent interaction with the nodes by removing their event listeners
+		 */
 		paralyzeNodes : function()
 		{
 			d3.selectAll('.node')
@@ -186,10 +239,22 @@
 				.on('mouseout', null);
 		},
 
+		/**
+		 * Attach event listeners for nodes
+		 */
 		activateNodes : function()
 		{
 			this.hookHandler(d3.selectAll('.node'), 'mouseenter');
 			this.hookHandler(d3.selectAll('.node'), 'mouseout');
+		},
+
+		/**
+		 * Clear the graph
+		 */
+		clear : function()
+		{
+			this.layers.nodes.remove();
+			this.layers.links.remove();			
 		}
 	};
 

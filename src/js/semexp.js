@@ -18,8 +18,8 @@ an experiment in navigating semantic networks
 (function(semexp) {
 	'use strict';
 	
-	Object.defineProperties(semexp, {
-		init : { value : function(config)
+	semexp = {
+		init : function(config)
 		{
 			this.graph = Object.create(semexp.graph, {
 				explorer : { value : this }
@@ -40,9 +40,9 @@ an experiment in navigating semantic networks
 			this.svg = d3.select('body').append('svg')
 				.attr('width', body.property('clientWidth'))
 				.attr('height', body.property('clientHeight'));
-		}},
+		},
 
-		addNode : { value : function(nodeName)
+		addNode : function(nodeName)
 		{
 			this.model.add(nodeName);
 			var menuData = this.menu.getData();
@@ -52,15 +52,15 @@ an experiment in navigating semantic networks
 			}
 			this.tools.setData('fromNode', null);
 			this.refresh();
-		}},
+		},
 
-		addRelation : { value : function(relName, options)
+		addRelation : function(relName, options)
 		{
 			this.model.add(relName, options);
 			this.refresh();
-		}},
+		},
 
-		addLink : { value : function(from, link, to)
+		addLink : function(from, link, to)
 		{
 			if (from == to) {
 				return;
@@ -70,22 +70,22 @@ an experiment in navigating semantic networks
 			this.tools.setData('fromNode', null);
 			// append link to the data?
 			this.refresh();
-		}},
+		},
 
-		removeNode : { value : function(nodeName)
+		removeNode : function(nodeName)
 		{
 			console.log(nodeName);
-		}},
+		},
 
-		refresh : { value : function()
+		refresh : function()
 		{
 			// this hooks the tick handler; perhaps move elsewhere
 			this.menu.refresh();
 			this.graph.refresh(this.model.generateGraph(), [this.tools]);
 			this.tools.refresh();
-		}},
+		},
 
-		draw : { value : function()
+		draw : function()
 		{
 			// clean svg
 			// this.svg.selectAll('*').remove();
@@ -96,19 +96,24 @@ an experiment in navigating semantic networks
 				[this.tools],
 				this.menu.getData());
 			this.tools.draw(this.svg);
-		}},
+		},
 
-		save : { value : function()
+		save : function()
 		{
 			console.log(this.model.export());
-		}},
+		},
 
-		load : { value : function(data)
+		load : function(data)
 		{
 			this.model.loadData(data);
 			this.draw();
-		}}
-	});
+		},
 
-	return semexp;
+		clear : function()
+		{
+			this.graph.clear();
+		}
+	};
+
+	window.semexp = semexp;
 }(window.semexp || {}));

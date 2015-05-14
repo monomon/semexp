@@ -1,0 +1,385 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <title>JSDoc: Source: semexpmenu.js</title>
+    
+    <script src="scripts/prettify/prettify.js"> </script>
+    <script src="scripts/prettify/lang-css.js"> </script>
+    <!--[if lt IE 9]>
+      <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+    <link type="text/css" rel="stylesheet" href="styles/prettify-tomorrow.css">
+    <link type="text/css" rel="stylesheet" href="styles/jsdoc-default.css">
+</head>
+
+<body>
+
+<div id="main">
+    
+    <h1 class="page-title">Source: semexpmenu.js</h1>
+    
+    
+
+
+    
+    <section>
+        <article>
+            <pre class="prettyprint source"><code>(function(semexp) {
+	'use strict';
+
+	/**
+	 * The default data to apply to the menu
+	 */
+	var defaultData = {
+		defaultFactRelation : undefined,
+		defaultFactEntity : undefined,
+		defaultRelation : undefined,
+		filterFactRelation : undefined,
+		filterFactEntity : undefined,
+		filterFactToggle : false,
+		filterRelation : undefined,
+		filterRelationToggle : false
+	};
+
+	var privateData = defaultData;
+
+	/**
+	 * @class semexp.menu
+	 */
+	semexp.menu = {
+		/**
+		 * This is a huge function that does all the drawing
+		 * It initializes the menu and at the same time
+		 * the data binding.
+		 * @return {Element} The menu root element
+		 */
+		draw : function ()
+		{
+			var explorer = this.explorer;
+
+			var menuData = privateData;
+
+			var menuEl = d3.select('.controls')
+				.data([menuData])
+				;
+
+			var menuElEnter = menuEl.enter()
+				.append('sidebar')
+				.classed('controls', true);
+
+			var form = menuElEnter.append('form')
+				.on('submit', function() {
+					if (d3.event) d3.event.preventDefault();
+
+					var value = menuEl.select('input[type=text]').property('value');
+					if (!value || value === '') {
+						return false;
+					}
+
+					explorer.addNode(value);
+					menuEl.select('input[type=text]').property('value', '');
+				});
+
+			// fixme: automate this stuff a little more
+			var elType = 'div';
+
+			form.append('label').text('node name');
+			form.append('input')
+				.attr('type','text')
+				.attr('name', 'name')
+				.attr('placeholder', 'name');
+			form.append('input')
+				.attr('type','submit')
+				.property('value', 'add node');
+
+			this.createFactSelector(
+				menuElEnter.append(elType),
+				'default',
+				'default fact',
+				function () {
+					explorer.refresh();
+				},
+				menuData
+			);
+
+			this.createRelationSelector(
+				menuElEnter.append(elType),
+				'default',
+				'default relation',
+				function () {
+					explorer.refresh();
+				},
+				menuData
+			);
+
+			this.createFactSelector(
+				menuElEnter.append(elType),
+				'filter',
+				'filter fact',
+				function () {
+					explorer.refresh();
+				},
+				menuData
+			).append('input')
+				.attr('type', 'checkbox')
+				.style({'width': 15, 'flex' : 'none'})
+				.attr('name', 'filterFactToggle')
+				.on('change', this.updateCheckbox);
+
+			d3.select('input[name=filterFactToggle]')
+				.property('checked', function (d) {
+					return d[this.name];
+				});
+
+			this.createRelationSelector(
+				menuElEnter.append(elType),
+				'filter',
+				'filter relation',
+				function () {
+					explorer.refresh();
+				},
+				menuData
+			).append('input')
+				.attr('type', 'checkbox')
+				.style({'width': 15, 'flex' : 'none'})
+				.attr('name', 'filterRelationToggle')
+				.on('change', this.updateCheckbox)
+				.property('checked', function (d) {
+					return d[this.name];
+				});
+
+			d3.select('input[name=filterRelationToggle]')
+				.property('checked', function (d) {
+					return d[this.name];
+				});
+
+			var buttonGroup = menuElEnter.append(elType);
+			buttonGroup.append('input')
+				.attr('type', 'button')
+				.property('value', 'save')
+				.on('click', function () {
+					explorer.save.call(explorer);
+				});
+
+			buttonGroup.append(elType)
+				.append('input')
+				.attr('type', 'button')
+				.property('value', 'load')
+				.on('click', function () {
+					console.log(this);
+				});
+
+			// this.applyData(menuData);
+
+			menuEl.exit().remove();
+
+			return menuEl;
+		},
+
+		/**
+		 * Create a selection box for facts
+		 * @param {Element} rootElement The menu root element,
+		 * in which to insert the fact selector
+		 * @param {String} basename Name used to distinguish this
+		 * from other fields. This is used to create the field's name attribute
+		 * @param {String} label Text of the field label
+		 * @param {String} buttonCallback
+		 * @param {Object} data
+		 * @return {Element} the selection box element
+		 */
+		createFactSelector : function(
+			rootElement, basename, label, buttonCallback, data)
+		{
+			var explorer = this.explorer;
+
+			rootElement.append('label').text(label);
+			var relations = Object.keys(explorer.model.getRelations());
+
+			rootElement.append('select')
+				.attr('name', basename + 'FactRelation')
+				.classed('relationSelector', true)
+				.on('change', this.updateData);
+
+			var select = d3.select('.relationSelector[name=' +
+				basename +
+				'FactRelation]');
+
+			var options = select.selectAll('option')
+				.data(relations);
+
+			options.enter()
+				.append('option')
+				.attr('value', function(d) {
+					return d;
+				})
+				.text(function(d) {
+					return d;
+				});
+
+			options.exit().remove();
+
+			select.property('value', function () {
+				return data[this.name];
+			});
+
+			var entities = explorer.model.getEntities();
+
+			rootElement.append('select')
+				.attr('name', basename + 'FactEntity')
+				.classed('entitySelector', true)
+				.on('change', this.updateData);
+			
+			// this is not the update selection
+			// force update all options, because
+			// data is not bound to menu data
+			var select2 = d3.select('.entitySelector[name=' +
+				basename +
+				'FactEntity]');
+
+			var options2 = select2.selectAll('option')
+				.data(entities);
+
+			options2.enter()
+				.append('option')
+				.attr('value', function(d) {
+					return d;
+				})
+				.text(function(d) {
+					return d;
+				});
+
+			select2.property('value', function () {
+				return data[this.name];
+			});
+
+			rootElement.append('input')
+				.property('value', 'apply')
+				.property('type', 'button')
+				.on('click', buttonCallback);
+
+			return rootElement;
+		},
+
+		/**
+		 * Create a selection box for a relation
+		 * @param {Element} rootElement The menu root element,
+		 * in which to insert the fact selector
+		 * @param {String} basename
+		 * @param {String} label
+		 * @param {String} changeCallback
+		 * @param {Object} data
+		 */
+		createRelationSelector : function(rootElement, basename, label, changeCallback, data)
+		{
+			var explorer = this.explorer;
+
+			var relations = Object.keys(explorer.model.getRelations());
+			var name = basename + 'Relation';
+
+			rootElement.append('label').text(label);
+			rootElement.append('select')
+				.attr('name', name)
+				.classed('relationSelector', true)
+				.on('change', this.updateData);
+
+			var select = d3.select('.relationSelector[name='+name+']');
+
+			var options = select.selectAll('option').data(relations).enter()
+				.append('option')
+				.attr('value', function(d) {
+					return d;
+				})
+				.text(function(d) {
+					return d;
+				});
+
+			select.property('value', function () {
+				return data[this.name];
+			});
+
+			return rootElement;
+		},
+
+		/**
+		 * Update data from a change event
+		 * this is an event handler, thus the scope is the
+		 * event target
+		 */
+		updateData : function ()
+		{
+			privateData[this.name] = this.value;
+			d3.select('.controls').data(privateData);
+		},
+
+		/**
+		 * Update data from a checkbox change event
+		 * this is an event handler, thus the scope is the
+		 * event target
+		 */
+		updateCheckbox : function ()
+		{
+			privateData[this.name] = this.checked;
+			d3.select('.controls').data([privateData]);
+		},
+
+		/**
+		 * Apply data to controls
+		 * @param {Object} data
+		 */
+		applyData : function (data)
+		{
+			for (var key in data) {
+				privateData[key] = data[key];
+			}
+			this.refresh();
+		},
+
+		/**
+		 * Get data by a given key. If key is not passed,
+		 * return entire data
+		 * @param {String} key
+		 * @return {Object}
+		 */
+		getData : function (key)
+		{
+			if (key) {
+				return privateData[key];
+			} else {
+				return privateData;
+			}
+		},
+
+		/**
+		 * Refresh menu, e.g. on a data change
+		 */
+		refresh : function ()
+		{
+			this.draw();
+		}
+	};
+
+	return semexp;
+}(window.semexp || {}));</code></pre>
+        </article>
+    </section>
+
+
+
+
+</div>
+
+<nav>
+    <h2><a href="index.html">Index</a></h2><h3>Classes</h3><ul><li><a href="semexp.html">semexp</a></li><li><a href="semexp.graph.html">graph</a></li><li><a href="semexp.menu.html">menu</a></li><li><a href="semexp.model.html">model</a></li><li><a href="semexp.tools.html">tools</a></li></ul>
+</nav>
+
+<br clear="both">
+
+<footer>
+    Documentation generated by <a href="https://github.com/jsdoc3/jsdoc">JSDoc 3.2.2</a> on Thu May 14 2015 13:21:54 GMT+0200 (CEST)
+</footer>
+
+<script> prettyPrint(); </script>
+<script src="scripts/linenumber.js"> </script>
+</body>
+</html>

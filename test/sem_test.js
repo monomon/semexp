@@ -58,4 +58,6 @@ describe('Semantic graph explorer', function () {
 	// TODO: test interactions, also drag'n'drop
 
 	// TODO: test menu
+
+	// test model
 });

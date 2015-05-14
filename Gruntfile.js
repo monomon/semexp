@@ -139,8 +139,8 @@ module.exports = function (grunt) {
 
 	grunt.registerTask('build', [
 		'jshint:beforeconcat',
-		// 'karma',
-		// 'jsdoc',
+		'karma',
+		'jsdoc',
 		'copy:build',
 		'uglify',
 		'processhtml:build'

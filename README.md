@@ -3,7 +3,8 @@ semexp
 
 A semantic graph editing tool
 
-[live demo](http://monomon.me/semexp/images/semexp.png)
+![screenshot](http://monomon.me/semexp/images/semexp.png)
+[live demo](http://monomon.me/semexp/)
 
 #Usage#
 ```	

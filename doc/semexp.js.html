@@ -25,35 +25,32 @@
     
     <section>
         <article>
-            <pre class="prettyprint source"><code>/*
-@summary
-Semantic explorer
-an experiment in navigating semantic networks
-
-* display a semantic network in a graph (force-directed layout)
-* allow arbitrary filters on the data - select from a menu
-
-@todo
-* filter nodes and then links?
-* add tools for manipulating the data, e.g.:
-	* add node - enter node details, name at a minimum
-	* add link - perhaps choose from a dropdown with limited options, e.g. relations that have already been defined in the model
-	* modify node
-* extend the database class:
-	* be able to add more data on a node (might be possible already?), e.g. an object or map
-	* implement loading and saving directly inside the semnet class; push changes upstream
-*/
-
-(function(semexp) {
+            <pre class="prettyprint source"><code>(function(semexp) {
 	'use strict';
-
+	
 	/**
 	 * @lends semexp
-	 */	
+	 */
 	semexp = {
 		/**
-		 * initialize submodules and svg context
-		 * @param {Object} config
+		 * Semantic explorer
+		 * an experiment in navigating semantic networks
+		 * &lt;ul>
+		 * &lt;li>display a semantic network in a graph (force-directed layout)&lt;/li>
+		 * &lt;li>allow arbitrary filters on the data - select from a menu or cli&lt;/li>
+		 * &lt;li>tools for manipulating the data, e.g.:&lt;/li>
+		 * &lt;ul>
+		 * 	&lt;li>add node - enter node details, name at a minimum&lt;/li>
+		 * 	&lt;li>add link - perhaps choose from a dropdown with limited options, e.g. relations that have already been defined in the model&lt;/li>
+		 * 	&lt;li>modify node - metadata, relations&lt;/li>
+		 * &lt;/ul>
+		 * &lt;/ul>
+		 * @todo
+		 * &lt;ul>
+		 * &lt;li>extend the database class:&lt;/li>
+		 * &lt;li>be able to add more data on a node (might be possible already?), e.g. an object or map&lt;/li>
+		 * &lt;li>implement loading and saving directly inside the semnet class; push changes to a remote (regardless if it's a server or another client)&lt;/li>
+		 * &lt;/ul>
 		 * @constructs
 		 */
 		init : function(config)
@@ -79,18 +76,27 @@ an experiment in navigating semantic networks
 				.attr('height', body.property('clientHeight'));
 		},
 
-		addNode : function(nodeId)
+		/**
+		 * Add a node to the network and refresh
+		 * @param {String} nodeName
+		 */
+		addNode : function(nodeName)
 		{
-			this.model.add(nodeId);
+			this.model.add(nodeName);
 			var menuData = this.menu.getData();
 			// add default fact
 			if (menuData.defaultFactRelation && menuData.defaultFactEntity) {
-				this.model.fact(nodeId, menuData.defaultFactRelation, menuData.defaultFactEntity);
+				this.model.fact(nodeName, menuData.defaultFactRelation, menuData.defaultFactEntity);
 			}
 			this.tools.setData('fromNode', null);
 			this.refresh();
 		},
 
+		/**
+		 * Add a relation type
+		 * @param {String} relNamee
+		 * @param {Object} options Additional options
+		 */
 		addRelation : function(relName, options)
 		{
 			this.model.add(relName, options);
@@ -98,10 +104,10 @@ an experiment in navigating semantic networks
 		},
 
 		/**
-		 * Add a link between two nodes
-		 * @param {String} from id of the source node
-		 * @param {String} link id of the relation to use
-		 * @param {String} to id of the target node
+		 * Add a relation instance between two nodes (triplet)
+		 * @param {String} from Source node id
+		 * @param {String} link Relation id
+		 * @param {String} to Target node id
 		 */
 		addLink : function(from, link, to)
 		{
@@ -116,16 +122,16 @@ an experiment in navigating semantic networks
 		},
 
 		/**
-		 * Remove a node from the graph
-		 * @param {String} nodeId node 
+		 * Remove a node
+		 * @fixme: unimplemented
 		 */
-		removeNode : function(nodeId)
+		removeNode : function(nodeName)
 		{
-			console.log(nodeId);
+			throw new Exception("unimplemented");
 		},
 
 		/**
-		 * Refresh the view - call refresh on all components
+		 * Refresh the explorer - each of its subcomponents
 		 */
 		refresh : function()
 		{
@@ -136,12 +142,11 @@ an experiment in navigating semantic networks
 		},
 
 		/**
-		 * Draw - call draw on all components
+		 * Draw the explorer
 		 */
 		draw : function()
 		{
 			// clean svg
-			// this.svg.selectAll('*').remove();
 			this.menu.draw();
 			this.graph.draw(
 				this.model.generateGraph(),
@@ -152,15 +157,15 @@ an experiment in navigating semantic networks
 		},
 
 		/**
-		 * Save data
+		 * Save the data of the current graph
 		 */
 		save : function()
 		{
-			return this.model.export();
+			console.log(this.model.export());
 		},
 
 		/**
-		 * Load data and draw view
+		 * Load data and draw its graph
 		 * @param {Object} data
 		 */
 		load : function(data)
@@ -170,16 +175,19 @@ an experiment in navigating semantic networks
 		},
 
 		/**
-		 * Clear the graph
+		 * Clear the explorer.
+		 * Clean up subcomponents
 		 */
-		clear : function(data)
+		clear : function()
 		{
 			this.graph.clear();
+			this.svg.selectAll('*').remove();
 		}
 	};
 
 	window.semexp = semexp;
-}(window.semexp || {}));</code></pre>
+}(window.semexp || {}));
+</code></pre>
         </article>
     </section>
 
@@ -195,7 +203,7 @@ an experiment in navigating semantic networks
 <br clear="both">
 
 <footer>
-    Documentation generated by <a href="https://github.com/jsdoc3/jsdoc">JSDoc 3.2.2</a> on Thu May 14 2015 13:21:54 GMT+0200 (CEST)
+    Documentation generated by <a href="https://github.com/jsdoc3/jsdoc">JSDoc 3.2.2</a> on Thu May 14 2015 20:46:26 GMT+0200 (CEST)
 </footer>
 
 <script> prettyPrint(); </script>

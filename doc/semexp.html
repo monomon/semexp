@@ -39,7 +39,7 @@
     
         
 <dt>
-    <h4 class="name" id="semexp"><span class="type-signature"></span>new semexp<span class="signature">(config)</span><span class="type-signature"></span></h4>
+    <h4 class="name" id="semexp"><span class="type-signature"></span>new semexp<span class="signature">()</span><span class="type-signature"></span></h4>
     
     
 </dt>
@@ -47,7 +47,18 @@
     
     
     <div class="description">
-        initialize submodules and svg context
+        Semantic explorer
+an experiment in navigating semantic networks
+<ul>
+<li>display a semantic network in a graph (force-directed layout)</li>
+<li>allow arbitrary filters on the data - select from a menu or cli</li>
+<li>tools for manipulating the data, e.g.:</li>
+<ul>
+	<li>add node - enter node details, name at a minimum</li>
+	<li>add link - perhaps choose from a dropdown with limited options, e.g. relations that have already been defined in the model</li>
+	<li>modify node - metadata, relations</li>
+</ul>
+</ul>
     </div>
     
 
@@ -55,54 +66,6 @@
     
     
     
-    
-        <h5>Parameters:</h5>
-        
-
-<table class="params">
-    <thead>
-	<tr>
-		
-		<th>Name</th>
-		
-		
-		<th>Type</th>
-		
-		
-		
-		
-		
-		<th class="last">Description</th>
-	</tr>
-	</thead>
-	
-	<tbody>
-	
-	
-        <tr>
-            
-                <td class="name"><code>config</code></td>
-            
-            
-            <td class="type">
-            
-                
-<span class="param-type">Object</span>
-
-
-            
-            </td>
-            
-            
-            
-            
-            
-            <td class="description last"></td>
-        </tr>
-	
-	
-	</tbody>
-</table>
     
     
     
@@ -128,7 +91,7 @@
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="semexp.js.html">semexp.js</a>, <a href="semexp.js.html#line32">line 32</a>
+        <a href="semexp.js.html">semexp.js</a>, <a href="semexp.js.html#line29">line 29</a>
     </li></ul></dd>
     
     
@@ -136,6 +99,17 @@
     
     
     
+    
+    <dt class="tag-todo">To Do:</dt>
+    <dd class="tag-todo">
+        <ul>
+            <li><ul>
+<li>extend the database class:</li>
+<li>be able to add more data on a node (might be possible already?), e.g. an object or map</li>
+<li>implement loading and saving directly inside the semnet class; push changes to a remote (regardless if it's a server or another client)</li>
+</ul></li>
+        </ul>
+    </dd>
     
 </dl>
 
@@ -198,7 +172,7 @@
     
     
     <div class="description">
-        Add a link between two nodes
+        Add a relation instance between two nodes (triplet)
     </div>
     
 
@@ -248,7 +222,7 @@
             
             
             
-            <td class="description last">id of the source node</td>
+            <td class="description last">Source node id</td>
         </tr>
 	
 	
@@ -271,7 +245,7 @@
             
             
             
-            <td class="description last">id of the relation to use</td>
+            <td class="description last">Relation id</td>
         </tr>
 	
 	
@@ -294,7 +268,7 @@
             
             
             
-            <td class="description last">id of the target node</td>
+            <td class="description last">Target node id</td>
         </tr>
 	
 	
@@ -325,7 +299,264 @@
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="semexp.js.html">semexp.js</a>, <a href="semexp.js.html#line79">line 79</a>
+        <a href="semexp.js.html">semexp.js</a>, <a href="semexp.js.html#line85">line 85</a>
+    </li></ul></dd>
+    
+    
+    
+    
+    
+    
+    
+</dl>
+
+    
+    
+
+    
+
+    
+    
+    
+    
+    
+    
+    
+</dd>
+
+        
+            
+<dt>
+    <h4 class="name" id="addNode"><span class="type-signature">&lt;static> </span>addNode<span class="signature">(nodeName)</span><span class="type-signature"></span></h4>
+    
+    
+</dt>
+<dd>
+    
+    
+    <div class="description">
+        Add a node to the network and refresh
+    </div>
+    
+
+    
+    
+    
+    
+    
+        <h5>Parameters:</h5>
+        
+
+<table class="params">
+    <thead>
+	<tr>
+		
+		<th>Name</th>
+		
+		
+		<th>Type</th>
+		
+		
+		
+		
+		
+		<th class="last">Description</th>
+	</tr>
+	</thead>
+	
+	<tbody>
+	
+	
+        <tr>
+            
+                <td class="name"><code>nodeName</code></td>
+            
+            
+            <td class="type">
+            
+                
+<span class="param-type">String</span>
+
+
+            
+            </td>
+            
+            
+            
+            
+            
+            <td class="description last"></td>
+        </tr>
+	
+	
+	</tbody>
+</table>
+    
+    
+    
+<dl class="details">
+    
+        
+    
+    
+    
+
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="semexp.js.html">semexp.js</a>, <a href="semexp.js.html#line56">line 56</a>
+    </li></ul></dd>
+    
+    
+    
+    
+    
+    
+    
+</dl>
+
+    
+    
+
+    
+
+    
+    
+    
+    
+    
+    
+    
+</dd>
+
+        
+            
+<dt>
+    <h4 class="name" id="addRelation"><span class="type-signature">&lt;static> </span>addRelation<span class="signature">(relNamee, options)</span><span class="type-signature"></span></h4>
+    
+    
+</dt>
+<dd>
+    
+    
+    <div class="description">
+        Add a relation type
+    </div>
+    
+
+    
+    
+    
+    
+    
+        <h5>Parameters:</h5>
+        
+
+<table class="params">
+    <thead>
+	<tr>
+		
+		<th>Name</th>
+		
+		
+		<th>Type</th>
+		
+		
+		
+		
+		
+		<th class="last">Description</th>
+	</tr>
+	</thead>
+	
+	<tbody>
+	
+	
+        <tr>
+            
+                <td class="name"><code>relNamee</code></td>
+            
+            
+            <td class="type">
+            
+                
+<span class="param-type">String</span>
+
+
+            
+            </td>
+            
+            
+            
+            
+            
+            <td class="description last"></td>
+        </tr>
+	
+	
+	
+        <tr>
+            
+                <td class="name"><code>options</code></td>
+            
+            
+            <td class="type">
+            
+                
+<span class="param-type">Object</span>
+
+
+            
+            </td>
+            
+            
+            
+            
+            
+            <td class="description last">Additional options</td>
+        </tr>
+	
+	
+	</tbody>
+</table>
+    
+    
+    
+<dl class="details">
+    
+        
+    
+    
+    
+
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="semexp.js.html">semexp.js</a>, <a href="semexp.js.html#line73">line 73</a>
     </li></ul></dd>
     
     
@@ -361,7 +592,8 @@
     
     
     <div class="description">
-        Clear the graph
+        Clear the explorer.
+Clean up subcomponents
     </div>
     
 
@@ -394,7 +626,7 @@
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="semexp.js.html">semexp.js</a>, <a href="semexp.js.html#line148">line 148</a>
+        <a href="semexp.js.html">semexp.js</a>, <a href="semexp.js.html#line154">line 154</a>
     </li></ul></dd>
     
     
@@ -430,7 +662,7 @@
     
     
     <div class="description">
-        Draw - call draw on all components
+        Draw the explorer
     </div>
     
 
@@ -463,7 +695,7 @@
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="semexp.js.html">semexp.js</a>, <a href="semexp.js.html#line114">line 114</a>
+        <a href="semexp.js.html">semexp.js</a>, <a href="semexp.js.html#line120">line 120</a>
     </li></ul></dd>
     
     
@@ -499,7 +731,7 @@
     
     
     <div class="description">
-        Load data and draw view
+        Load data and draw its graph
     </div>
     
 
@@ -580,7 +812,7 @@
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="semexp.js.html">semexp.js</a>, <a href="semexp.js.html#line139">line 139</a>
+        <a href="semexp.js.html">semexp.js</a>, <a href="semexp.js.html#line144">line 144</a>
     </li></ul></dd>
     
     
@@ -616,7 +848,7 @@
     
     
     <div class="description">
-        Refresh the view - call refresh on all components
+        Refresh the explorer - each of its subcomponents
     </div>
     
 
@@ -649,7 +881,7 @@
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="semexp.js.html">semexp.js</a>, <a href="semexp.js.html#line103">line 103</a>
+        <a href="semexp.js.html">semexp.js</a>, <a href="semexp.js.html#line109">line 109</a>
     </li></ul></dd>
     
     
@@ -677,7 +909,7 @@
         
             
 <dt>
-    <h4 class="name" id="removeNode"><span class="type-signature">&lt;static> </span>removeNode<span class="signature">(nodeId)</span><span class="type-signature"></span></h4>
+    <h4 class="name" id="removeNode"><span class="type-signature">&lt;static> </span>removeNode<span class="signature">()</span><span class="type-signature"></span></h4>
     
     
 </dt>
@@ -685,7 +917,7 @@
     
     
     <div class="description">
-        Remove a node from the graph
+        Remove a node
     </div>
     
 
@@ -693,54 +925,6 @@
     
     
     
-    
-        <h5>Parameters:</h5>
-        
-
-<table class="params">
-    <thead>
-	<tr>
-		
-		<th>Name</th>
-		
-		
-		<th>Type</th>
-		
-		
-		
-		
-		
-		<th class="last">Description</th>
-	</tr>
-	</thead>
-	
-	<tbody>
-	
-	
-        <tr>
-            
-                <td class="name"><code>nodeId</code></td>
-            
-            
-            <td class="type">
-            
-                
-<span class="param-type">String</span>
-
-
-            
-            </td>
-            
-            
-            
-            
-            
-            <td class="description last">node</td>
-        </tr>
-	
-	
-	</tbody>
-</table>
     
     
     
@@ -766,7 +950,7 @@
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="semexp.js.html">semexp.js</a>, <a href="semexp.js.html#line95">line 95</a>
+        <a href="semexp.js.html">semexp.js</a>, <a href="semexp.js.html#line101">line 101</a>
     </li></ul></dd>
     
     
@@ -802,7 +986,7 @@
     
     
     <div class="description">
-        Save data
+        Save the data of the current graph
     </div>
     
 
@@ -835,7 +1019,7 @@
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="semexp.js.html">semexp.js</a>, <a href="semexp.js.html#line130">line 130</a>
+        <a href="semexp.js.html">semexp.js</a>, <a href="semexp.js.html#line135">line 135</a>
     </li></ul></dd>
     
     
@@ -882,7 +1066,7 @@
 <br clear="both">
 
 <footer>
-    Documentation generated by <a href="https://github.com/jsdoc3/jsdoc">JSDoc 3.2.2</a> on Thu May 14 2015 13:21:54 GMT+0200 (CEST)
+    Documentation generated by <a href="https://github.com/jsdoc3/jsdoc">JSDoc 3.2.2</a> on Thu May 14 2015 20:46:26 GMT+0200 (CEST)
 </footer>
 
 <script> prettyPrint(); </script>

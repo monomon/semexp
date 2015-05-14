@@ -32,6 +32,10 @@
     model
     </h2>
     
+        <div class="class-description">semexp.model
+Uses an internal semnet and provides an interface to it.
+Also able to export the semantic network to an object</div>
+    
 </header>  
 
 <article>
@@ -47,11 +51,6 @@
 </dt>
 <dd>
     
-    
-    <div class="description">
-        This model is generally a simple wrapper around semnet,
-but also knows how to generate a graph structure from the db.
-    </div>
     
 
     
@@ -83,7 +82,7 @@ but also knows how to generate a graph structure from the db.
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="semexpmodel.js.html">semexpmodel.js</a>, <a href="semexpmodel.js.html#line4">line 4</a>
+        <a href="semexpmodel.js.html">semexpmodel.js</a>, <a href="semexpmodel.js.html#line9">line 9</a>
     </li></ul></dd>
     
     
@@ -137,7 +136,7 @@ but also knows how to generate a graph structure from the db.
     
     
     <div class="description">
-        Wrapper around db.add
+        simple wrapper around semnet.add
     </div>
     
 
@@ -210,7 +209,7 @@ but also knows how to generate a graph structure from the db.
             
             
             
-            <td class="description last">Additional options for the node</td>
+            <td class="description last">Additional options, normally used for relations</td>
         </tr>
 	
 	
@@ -277,7 +276,7 @@ but also knows how to generate a graph structure from the db.
     
     
     <div class="description">
-        Export the db data
+        Export database to a serializable object
     </div>
     
 
@@ -310,7 +309,7 @@ but also knows how to generate a graph structure from the db.
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="semexpmodel.js.html">semexpmodel.js</a>, <a href="semexpmodel.js.html#line111">line 111</a>
+        <a href="semexpmodel.js.html">semexpmodel.js</a>, <a href="semexpmodel.js.html#line110">line 110</a>
     </li></ul></dd>
     
     
@@ -364,7 +363,7 @@ but also knows how to generate a graph structure from the db.
     
     
     <div class="description">
-        Wrapper around db.fact
+        Add a fact to the database
     </div>
     
 
@@ -414,7 +413,7 @@ but also knows how to generate a graph structure from the db.
             
             
             
-            <td class="description last">ID of the source node</td>
+            <td class="description last">Source object id</td>
         </tr>
 	
 	
@@ -437,7 +436,7 @@ but also knows how to generate a graph structure from the db.
             
             
             
-            <td class="description last">ID of the relation</td>
+            <td class="description last">Relation id</td>
         </tr>
 	
 	
@@ -460,7 +459,7 @@ but also knows how to generate a graph structure from the db.
             
             
             
-            <td class="description last">ID of the target node</td>
+            <td class="description last">Target object id</td>
         </tr>
 	
 	
@@ -527,7 +526,7 @@ but also knows how to generate a graph structure from the db.
     
     
     <div class="description">
-        Translate from semantic network to a graph for the layout algorithm
+        translate from semantic network to a graph object for the layout algorithm
     </div>
     
 
@@ -560,7 +559,7 @@ but also knows how to generate a graph structure from the db.
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="semexpmodel.js.html">semexpmodel.js</a>, <a href="semexpmodel.js.html#line31">line 31</a>
+        <a href="semexpmodel.js.html">semexpmodel.js</a>, <a href="semexpmodel.js.html#line30">line 30</a>
     </li></ul></dd>
     
     
@@ -585,7 +584,7 @@ but also knows how to generate a graph structure from the db.
     
             
 <div class="param-desc">
-    A graph representaion, consisting of nodes and links
+    a graph representation with nodes and links
 </div>
 
 
@@ -677,7 +676,7 @@ define what is a relation in the semantic network itself?
     
             
 <div class="param-desc">
-    Entities matching the current filter
+    entities that are not relations (this is still a bit flaky)
 </div>
 
 
@@ -710,7 +709,8 @@ define what is a relation in the semantic network itself?
     
     
     <div class="description">
-        Get all relations in the db
+        Obtain all relations in the db
+The relations object, as defined by semnet
     </div>
     
 
@@ -767,6 +767,10 @@ define what is a relation in the semantic network itself?
     <h5>Returns:</h5>
     
             
+<div class="param-desc">
+    relations
+</div>
+
 
 
 <dl>
@@ -797,7 +801,7 @@ define what is a relation in the semantic network itself?
     
     
     <div class="description">
-        Load data into semantic model
+        load data into semantic model
     </div>
     
 
@@ -925,7 +929,7 @@ define what is a relation in the semantic network itself?
 <br clear="both">
 
 <footer>
-    Documentation generated by <a href="https://github.com/jsdoc3/jsdoc">JSDoc 3.2.2</a> on Thu May 14 2015 13:21:54 GMT+0200 (CEST)
+    Documentation generated by <a href="https://github.com/jsdoc3/jsdoc">JSDoc 3.2.2</a> on Thu May 14 2015 20:46:27 GMT+0200 (CEST)
 </footer>
 
 <script> prettyPrint(); </script>

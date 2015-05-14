@@ -32,6 +32,9 @@
     graph
     </h2>
     
+        <div class="class-description">semexp.graph
+Draw a force-directed graph of a structure passed to draw</div>
+    
 </header>  
 
 <article>
@@ -47,12 +50,6 @@
 </dt>
 <dd>
     
-    
-    <div class="description">
-        Graph drawing and interaction module
-Draws the semantic graph in svg. Handles mouse interactions
-with the graph.
-    </div>
     
 
     
@@ -84,7 +81,7 @@ with the graph.
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="semexpgraph.js.html">semexpgraph.js</a>, <a href="semexpgraph.js.html#line4">line 4</a>
+        <a href="semexpgraph.js.html">semexpgraph.js</a>, <a href="semexpgraph.js.html#line8">line 8</a>
     </li></ul></dd>
     
     
@@ -138,8 +135,7 @@ with the graph.
     
     
     <div class="description">
-        Reactivate interaction with the nodes
-by hooking listeners again
+        Attach event listeners for nodes
     </div>
     
 
@@ -172,7 +168,7 @@ by hooking listeners again
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="semexpgraph.js.html">semexpgraph.js</a>, <a href="semexpgraph.js.html#line247">line 247</a>
+        <a href="semexpgraph.js.html">semexpgraph.js</a>, <a href="semexpgraph.js.html#line251">line 251</a>
     </li></ul></dd>
     
     
@@ -208,7 +204,7 @@ by hooking listeners again
     
     
     <div class="description">
-        Clear graph - remove all nodes and links
+        Clear the graph
     </div>
     
 
@@ -241,7 +237,7 @@ by hooking listeners again
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="semexpgraph.js.html">semexpgraph.js</a>, <a href="semexpgraph.js.html#line256">line 256</a>
+        <a href="semexpgraph.js.html">semexpgraph.js</a>, <a href="semexpgraph.js.html#line260">line 260</a>
     </li></ul></dd>
     
     
@@ -277,7 +273,7 @@ by hooking listeners again
     
     
     <div class="description">
-        Draw the graph
+        Draw the graph in a force directed layout
     </div>
     
 
@@ -327,7 +323,7 @@ by hooking listeners again
             
             
             
-            <td class="description last">A graph object as returned from the model</td>
+            <td class="description last">object, consisting of nodes and links</td>
         </tr>
 	
 	
@@ -340,7 +336,7 @@ by hooking listeners again
             <td class="type">
             
                 
-<span class="param-type">Element</span>
+<span class="param-type">SVGElement</span>
 
 
             
@@ -350,7 +346,7 @@ by hooking listeners again
             
             
             
-            <td class="description last">The svg base element</td>
+            <td class="description last">Base svg element</td>
         </tr>
 	
 	
@@ -373,7 +369,7 @@ by hooking listeners again
             
             
             
-            <td class="description last"></td>
+            <td class="description last">Entities that need to be updated on every tick; they have an update method</td>
         </tr>
 	
 	
@@ -404,7 +400,7 @@ by hooking listeners again
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="semexpgraph.js.html">semexpgraph.js</a>, <a href="semexpgraph.js.html#line159">line 159</a>
+        <a href="semexpgraph.js.html">semexpgraph.js</a>, <a href="semexpgraph.js.html#line162">line 162</a>
     </li></ul></dd>
     
     
@@ -432,7 +428,7 @@ by hooking listeners again
         
             
 <dt>
-    <h4 class="name" id="drawLinks"><span class="type-signature">&lt;static> </span>drawLinks<span class="signature">(links, layer)</span><span class="type-signature"> &rarr; {Element}</span></h4>
+    <h4 class="name" id="drawLinks"><span class="type-signature">&lt;static> </span>drawLinks<span class="signature">(links, layer)</span><span class="type-signature"> &rarr; {d3.selection}</span></h4>
     
     
 </dt>
@@ -490,7 +486,7 @@ by hooking listeners again
             
             
             
-            <td class="description last"></td>
+            <td class="description last">Data for all links</td>
         </tr>
 	
 	
@@ -503,7 +499,7 @@ by hooking listeners again
             <td class="type">
             
                 
-<span class="param-type">SVGElement</span>
+<span class="param-type">SVGGroup</span>
 
 
             
@@ -513,7 +509,7 @@ by hooking listeners again
             
             
             
-            <td class="description last">The SVG root element</td>
+            <td class="description last">The svg element to append to</td>
         </tr>
 	
 	
@@ -544,7 +540,7 @@ by hooking listeners again
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="semexpgraph.js.html">semexpgraph.js</a>, <a href="semexpgraph.js.html#line79">line 79</a>
+        <a href="semexpgraph.js.html">semexpgraph.js</a>, <a href="semexpgraph.js.html#line81">line 81</a>
     </li></ul></dd>
     
     
@@ -569,7 +565,7 @@ by hooking listeners again
     
             
 <div class="param-desc">
-    the update selection for links
+    update selection
 </div>
 
 
@@ -580,7 +576,7 @@ by hooking listeners again
 	</dt>
 	<dd>
 		
-<span class="param-type">Element</span>
+<span class="param-type">d3.selection</span>
 
 
 	</dd>
@@ -594,7 +590,7 @@ by hooking listeners again
         
             
 <dt>
-    <h4 class="name" id="drawNodes"><span class="type-signature">&lt;static> </span>drawNodes<span class="signature">(nodes, layer, a)</span><span class="type-signature"></span></h4>
+    <h4 class="name" id="drawNodes"><span class="type-signature">&lt;static> </span>drawNodes<span class="signature">(nodes, layer, dragFunc)</span><span class="type-signature"> &rarr; {d3.selection}</span></h4>
     
     
 </dt>
@@ -602,8 +598,7 @@ by hooking listeners again
     
     
     <div class="description">
-        Draw all nodes of the graph
-This also performs the data binding
+        Draw the graph nodes
     </div>
     
 
@@ -653,7 +648,7 @@ This also performs the data binding
             
             
             
-            <td class="description last"></td>
+            <td class="description last">The node data for all nodes</td>
         </tr>
 	
 	
@@ -666,7 +661,7 @@ This also performs the data binding
             <td class="type">
             
                 
-<span class="param-type">SVGElement</span>
+<span class="param-type">SVGGroup</span>
 
 
             
@@ -676,14 +671,14 @@ This also performs the data binding
             
             
             
-            <td class="description last">The SVG root element</td>
+            <td class="description last">The layer to append the node to</td>
         </tr>
 	
 	
 	
         <tr>
             
-                <td class="name"><code>a</code></td>
+                <td class="name"><code>dragFunc</code></td>
             
             
             <td class="type">
@@ -699,7 +694,7 @@ This also performs the data binding
             
             
             
-            <td class="description last">drag callback</td>
+            <td class="description last"></td>
         </tr>
 	
 	
@@ -730,7 +725,7 @@ This also performs the data binding
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="semexpgraph.js.html">semexpgraph.js</a>, <a href="semexpgraph.js.html#line40">line 40</a>
+        <a href="semexpgraph.js.html">semexpgraph.js</a>, <a href="semexpgraph.js.html#line42">line 42</a>
     </li></ul></dd>
     
     
@@ -738,6 +733,13 @@ This also performs the data binding
     
     
     
+    
+    <dt class="tag-todo">To Do:</dt>
+    <dd class="tag-todo">
+        <ul>
+            <li>resize text based on the circle radius so it fits</li>
+        </ul>
+    </dd>
     
 </dl>
 
@@ -751,6 +753,28 @@ This also performs the data binding
     
     
     
+    <h5>Returns:</h5>
+    
+            
+<div class="param-desc">
+    update selection
+</div>
+
+
+
+<dl>
+	<dt>
+		Type
+	</dt>
+	<dd>
+		
+<span class="param-type">d3.selection</span>
+
+
+	</dd>
+</dl>
+
+        
     
     
 </dd>
@@ -816,7 +840,7 @@ This also performs the data binding
             
             
             
-            <td class="description last">The data object</td>
+            <td class="description last">Data object for which to calculate the radius</td>
         </tr>
 	
 	
@@ -847,7 +871,7 @@ This also performs the data binding
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="semexpgraph.js.html">semexpgraph.js</a>, <a href="semexpgraph.js.html#line28">line 28</a>
+        <a href="semexpgraph.js.html">semexpgraph.js</a>, <a href="semexpgraph.js.html#line29">line 29</a>
     </li></ul></dd>
     
     
@@ -871,6 +895,10 @@ This also performs the data binding
     <h5>Returns:</h5>
     
             
+<div class="param-desc">
+    radius
+</div>
+
 
 
 <dl>
@@ -893,7 +921,7 @@ This also performs the data binding
         
             
 <dt>
-    <h4 class="name" id="hookHandler"><span class="type-signature">&lt;static> </span>hookHandler<span class="signature">(subject, eventName)</span><span class="type-signature"> &rarr; {function}</span></h4>
+    <h4 class="name" id="hookHandler"><span class="type-signature">&lt;static> </span>hookHandler<span class="signature">(subject, eventName)</span><span class="type-signature"></span></h4>
     
     
 </dt>
@@ -901,7 +929,8 @@ This also performs the data binding
     
     
     <div class="description">
-        Connect mouse listeners for the nodes
+        Connect all event listeners for nodes.
+These include drag'n'drop, etc.
     </div>
     
 
@@ -951,7 +980,7 @@ This also performs the data binding
             
             
             
-            <td class="description last">The element to add the listener to</td>
+            <td class="description last">Element to add listener to</td>
         </tr>
 	
 	
@@ -1005,7 +1034,7 @@ This also performs the data binding
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="semexpgraph.js.html">semexpgraph.js</a>, <a href="semexpgraph.js.html#line126">line 126</a>
+        <a href="semexpgraph.js.html">semexpgraph.js</a>, <a href="semexpgraph.js.html#line129">line 129</a>
     </li></ul></dd>
     
     
@@ -1029,23 +1058,7 @@ This also performs the data binding
     <h5>Returns:</h5>
     
             
-<div class="param-desc">
-    the event handler
-</div>
 
-
-
-<dl>
-	<dt>
-		Type
-	</dt>
-	<dd>
-		
-<span class="param-type">function</span>
-
-
-	</dd>
-</dl>
 
         
     
@@ -1063,7 +1076,7 @@ This also performs the data binding
     
     
     <div class="description">
-        Disable interaction with the nodes - remove all input listeners
+        Prevent interaction with the nodes by removing their event listeners
     </div>
     
 
@@ -1096,7 +1109,7 @@ This also performs the data binding
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="semexpgraph.js.html">semexpgraph.js</a>, <a href="semexpgraph.js.html#line236">line 236</a>
+        <a href="semexpgraph.js.html">semexpgraph.js</a>, <a href="semexpgraph.js.html#line241">line 241</a>
     </li></ul></dd>
     
     
@@ -1124,12 +1137,16 @@ This also performs the data binding
         
             
 <dt>
-    <h4 class="name" id="refresh"><span class="type-signature">&lt;static> </span>refresh<span class="signature">(graph, tickComponents)</span><span class="type-signature"></span></h4>
+    <h4 class="name" id="refresh"><span class="type-signature">&lt;static> </span>refresh<span class="signature">(graph, svg, tickComponents)</span><span class="type-signature"></span></h4>
     
     
 </dt>
 <dd>
     
+    
+    <div class="description">
+        Refresh the graph
+    </div>
     
 
     
@@ -1178,7 +1195,30 @@ This also performs the data binding
             
             
             
-            <td class="description last"></td>
+            <td class="description last">object, consisting of nodes and links</td>
+        </tr>
+	
+	
+	
+        <tr>
+            
+                <td class="name"><code>svg</code></td>
+            
+            
+            <td class="type">
+            
+                
+<span class="param-type">SVGElement</span>
+
+
+            
+            </td>
+            
+            
+            
+            
+            
+            <td class="description last">Base svg element</td>
         </tr>
 	
 	
@@ -1201,7 +1241,7 @@ This also performs the data binding
             
             
             
-            <td class="description last">Components to be notified of updates</td>
+            <td class="description last">Entities that need to be updated on every</td>
         </tr>
 	
 	
@@ -1232,7 +1272,7 @@ This also performs the data binding
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="semexpgraph.js.html">semexpgraph.js</a>, <a href="semexpgraph.js.html#line197">line 197</a>
+        <a href="semexpgraph.js.html">semexpgraph.js</a>, <a href="semexpgraph.js.html#line202">line 202</a>
     </li></ul></dd>
     
     
@@ -1279,7 +1319,7 @@ This also performs the data binding
 <br clear="both">
 
 <footer>
-    Documentation generated by <a href="https://github.com/jsdoc3/jsdoc">JSDoc 3.2.2</a> on Thu May 14 2015 13:21:54 GMT+0200 (CEST)
+    Documentation generated by <a href="https://github.com/jsdoc3/jsdoc">JSDoc 3.2.2</a> on Thu May 14 2015 20:46:26 GMT+0200 (CEST)
 </footer>
 
 <script> prettyPrint(); </script>

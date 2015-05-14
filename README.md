@@ -3,6 +3,8 @@ semexp
 
 A semantic graph editing tool
 
+[live demo](http://monomon.me/semexp/images/semexp.png)
+
 #Usage#
 ```	
 var explorer = Object.create(window.semexp);

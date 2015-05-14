@@ -2,7 +2,6 @@
 	'use strict';
 
 	/**
-	 * @var {Object} defaultData
 	 * Default datum for the tools
 	 */
 	var defaultData = {
@@ -12,7 +11,6 @@
 	};
 
 	/**
-	 * @var {Object} iconMapping
 	 * mapping from icon name to image filename
 	 */
 	var iconMapping = {
@@ -23,15 +21,14 @@
 	};
 
 	/**
-	 * @var {String}
 	 * path to the icons
 	 */
 	var iconPath = '../bower_components/Icons/picol_latest_prerelease_svg/';
 
 	/**
-	 * @function
 	 * @param {String} key Icon name
 	 * @return {String}
+	 * @function
 	 */
 	function getIcon (key)
 	{
@@ -39,11 +36,11 @@
 	}
 
 	/**
-	 * @class
-	 * graph tools
-	 * these appear on nodes as circles with icons
-	 * that can be interaacted with
-	 *
+	 * @class semexp.tools
+	 * graph tools.
+	 * These appear on nodes as circles with icons
+	 * that can be interacted with
+	 * 
 	 */
 	semexp.tools = {
 

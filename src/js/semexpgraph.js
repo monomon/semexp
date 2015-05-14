@@ -1,16 +1,21 @@
 (function (semexp) {
 	'use strict';
+
+	/**
+	 * @class semexp.graph
+	 * Draw a force-directed graph of a structure passed to draw
+	 */
 	semexp.graph = {
 
-		radiusBase : 40,
-		radiusMultiplier : 15,
+		radiusBase : 35,
+		radiusMultiplier : 8,
 
 		layoutProps : {
 			linkStrength : 0.6,
 			distance : 200,
 			friction : 0.9,
 			charge : -300,
-			gravity : 0.02,
+			gravity : 0.03,
 			theta : 0.9,
 			alpha : 0.7
 		},
@@ -28,10 +33,11 @@
 
 		/**
 		 * Draw the graph nodes
+		 * @todo resize text based on the circle radius so it fits
 		 * @param {Array} nodes The node data for all nodes
 		 * @param {SVGGroup} layer The layer to append the node to
 		 * @param {Function} dragFunc 
-		 * @return {d3.selection} update selection
+		 * @return {d3.selection} {@link |update selection}
 		 */
 		drawNodes : function(nodes, layer, dragFunc)
 		{

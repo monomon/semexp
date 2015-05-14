@@ -3,6 +3,8 @@
 
 	/**
 	 * @class semexp.model
+	 * Uses an internal semnet and provides an interface to it.
+	 * Also able to export the semantic network to an object
 	 */
 	semexp.model = {
 		/**

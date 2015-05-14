@@ -19,6 +19,7 @@
 
 	/**
 	 * @class semexp.menu
+	 * Web form used to interact with the semantic network
 	 */
 	semexp.menu = {
 		/**

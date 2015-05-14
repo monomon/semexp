@@ -110,5 +110,5 @@ an experiment in navigating semantic networks
 		}}
 	});
 
-	window.semexp = semexp;
+	return semexp;
 }(window.semexp || {}));

@@ -67,6 +67,7 @@
 
 			/**
 			 * create a node with its corresponding links
+			 * filtered by having a certain relation defined
 			 */
 			function createNode(node)
 			{
@@ -87,6 +88,7 @@
 						target : node,
 						name : relationName
 					});
+				});
 			}
 
 			for (var relationName in relations) {
@@ -99,18 +101,30 @@
 			};
 		},
 
+		/**
+		 * Export database to a serializable object
+		 * @return {Object}
+		 */
 		export : function()
 		{
 			return db.export();
 		},
 
+		/**
+		 * Obtain all relations in the db
+		 * The relations object, as defined by semnet
+		 * @return {Object} relations
+		 */
 		getRelations : function()
 		{
 			return db.relations;
 		},
 
-		// filter out relations; this might not be the best way
-		// define what is a relation in the semantic network itself?
+		/**
+		 * filter out relations; this might not be the best way
+		 * define what is a relation in the semantic network itself?
+		 * @return {Array} entities that are not relations (this is still a bit flaky)
+		 */
 		getEntities : function()
 		{
 			var relationKeys = Object.keys(this.getRelations());
@@ -119,12 +133,22 @@
 			});
 		},
 
-		// some simple wrapper functions
+		/**
+		 * simple wrapper around semnet.add
+		 * @param {String} nodeName
+		 * @param {Object} options Additional options, normally used for relations
+		 */
 		add : function(nodeName, options)
 		{
 			db.add(nodeName, options);
 		},
 
+		/**
+		 * Add a fact to the database
+		 * @param {String} from Source object id
+		 * @param {String} relation Relation id
+		 * @param {String} to Target object id
+		 */
 		fact : function(from, relation, to)
 		{
 			db.fact(from, relation, to);

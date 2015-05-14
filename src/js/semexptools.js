@@ -1,11 +1,19 @@
 (function(semexp) {
 	'use strict';
+
+	/**
+	 * Default datum for the tools
+	 */
 	var defaultData = {
 		fromNode : null,
 		toNode : null,
 		linkType : null
 	};
 
+	/**
+	 * @var {Object}
+	 * mapping from icon name to image filename
+	 */
 	var iconMapping = {
 		connect : 'relevance.svg',
 		disconnect : 'cut.svg',
@@ -13,15 +21,36 @@
 		remove : 'database_remove.svg',
 	};
 
+	/**
+	 * @var {String}
+	 * path to the icons
+	 */
 	var iconPath = '/3p/PicolSigns/picol_latest_prerelease_svg/';
 
+	/**
+	 * @function
+	 * @param {String} key Icon name
+	 * @return {String}
+	 */
 	function getIcon (key)
 	{
 		return iconPath + iconMapping[key];
 	}
 
+	/**
+	 * @class
+	 * graph tools
+	 * these appear on nodes as circles with icons
+	 * that can be interaacted with
+	 *
+	 */
 	semexp.tools = {
 
+		/**
+		 * draw the tools
+		 * @param {SVGElement} svg Base svg element
+		 * @return {SVGGroup}
+		 */
 		draw : function(svg)
 		{
 			var connDrag = d3.behavior.drag();
@@ -71,6 +100,13 @@
 			return group;
 		},
 
+		/**
+		 * Create a single tool
+		 * @param {Element} rootElement Element to append tool to
+		 * @param {String} icon Icon name
+		 * @param {String} label Tooltip text
+		 * @param {Number} radius tool circle radius
+		 */
 		createTool : function(rootElement, icon, label, radius)
 		{
 			var g = rootElement.append('g')
@@ -88,6 +124,11 @@
 			return g;
 		},
 
+		/**
+		 * refresh tools
+		 * unset the fromNode and hide the tools
+		 * This happens after interaction is complete
+		 */
 		refresh : function()
 		{
 			this.setData('fromNode', null);
@@ -96,11 +137,18 @@
 
 		/*
 		 * close over event handlers with the explorer in scope
+		 * @param {Element} subject Element to add handlers on
+		 * @param {String} eventName
 		 */
 		hookHandler : function (subject, eventName)
 		{
 			var explorer = this.explorer;
 			var eventSwitch = {
+				/**
+				 * drag handler function
+				 * @param {Object} data stored by d3 about the node
+				 * @return {Object} updated data
+				 */
 				drag : function (data)
 				{
 					var pos = d3.mouse(d3.select('svg').node());
@@ -131,6 +179,9 @@
 					return data;
 				},
 
+				/**
+				 * dragstart handler
+				 */
 				dragstart : function ()
 				{
 					d3.event.sourceEvent.stopPropagation();
@@ -161,6 +212,11 @@
 					// this could be made better...
 					explorer.graph.paralyzeNodes();
 				},
+
+				/**
+				 * dragend handler
+				 * @param {Object} data Data stored by d3 about the target element
+				 */
 				dragend : function (data)
 				{
 					d3.event.sourceEvent.stopPropagation();
@@ -188,6 +244,10 @@
 			return eventSwitch[eventName];
 		},
 
+		/**
+		 * Obtain tools data
+		 * @return {Object} datum defined on tools
+		 */
 		getData : function()
 		{
 			var dat = null;
@@ -200,6 +260,13 @@
 			return dat;
 		},
 
+		/**
+		 * Set data on the tools datum
+		 * Also update the state
+		 *
+		 * @param {String} key
+		 * @param {Mixed}
+		 */
 		setData : function(key, value)
 		{
 			var tools = d3.select('.tools');
@@ -214,6 +281,13 @@
 			this.update();
 		},
 
+		/**
+		 * Obtain rect coordinates from radial
+		 * FIXME: this should be moved out
+		 * @param {Number} angle in radians
+		 * @param {Number} radius in pixels
+		 * @return {Object} containing x and y keys
+		 */
 		getToolPosition : function(angle, radius)
 		{
 			return {
@@ -222,9 +296,10 @@
 			};
 		},
 
-		// this is called from force.tick, which means at every frame
-		// be careful about the amount of updates
-		// 
+		/**
+		 * this is called from force.tick, which means at every frame
+		 * be careful about the amount of updates
+		 */ 
 		update : function()
 		{
 			var tools = d3.select('.tools');
@@ -279,7 +354,6 @@
 			}
 		}
 	};
-	window.semexp = semexp;
 
 	return semexp;
 }(window.semexp || {}));

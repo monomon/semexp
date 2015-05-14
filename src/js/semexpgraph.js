@@ -193,6 +193,5 @@
 		}
 	};
 
-	window.semexp = semexp;
-
+	return semexp;
 }(window.semexp || {}));

@@ -7,7 +7,7 @@ A semantic graph editing tool
 [live demo](http://monomon.me/semexp/)
 
 #Usage#
-```	
+```
 var explorer = Object.create(window.semexp);
 explorer.init({
 	width : 800,
@@ -15,6 +15,9 @@ explorer.init({
 });
 
 explorer.load(data);
+
+explorer.addNode('harp');
+explorer.addLink('harp', 'isA', 'chordophone');
 ```
 ###AJAX example###
 ```

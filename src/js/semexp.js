@@ -6,11 +6,16 @@
 	 */
 	semexp = {
 		/**
-		 * Semantic explorer
+		 * @classdesc Semantic explorer,
 		 * an experiment in navigating semantic networks
 		 * <ul>
-		 * <li>display a semantic network in a graph (force-directed layout)</li>
-		 * <li>allow arbitrary filters on the data - select from a menu or cli</li>
+		 * <li>display a semantic network in a graph  with a force-directed layout</li>
+		 * <li>allow arbitrary filters on the data</li>
+		 * <ul>
+		 * 	<li>filter relations to show as arrows from a list</li>
+		 * 	<li>filter entities which have certain relations defined (how to make this flexible?)</li>
+		 * 	<li>allow both from menu and from a cli</li>
+		 * </ul>
 		 * <li>tools for manipulating the data, e.g.:</li>
 		 * <ul>
 		 * 	<li>add node - enter node details, name at a minimum</li>

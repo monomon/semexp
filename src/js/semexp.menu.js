@@ -18,7 +18,7 @@
 	var privateData = defaultData;
 
 	/**
-	 * @class semexp.menu
+	 * @class
 	 * Web form used to interact with the semantic network
 	 */
 	semexp.menu = {

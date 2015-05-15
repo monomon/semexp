@@ -2,8 +2,8 @@
 	var db = new Semnet();
 
 	/**
-	 * @class semexp.model
-	 * Uses an internal semnet and provides an interface to it.
+	 * @class
+	 * Uses an internal {@link https://github.com/asciimoo/semnet|semnet} and provides an interface to it.
 	 * Also able to export the semantic network to an object
 	 */
 	semexp.model = {
@@ -68,8 +68,10 @@
 			}
 
 			/**
-			 * create a node with its corresponding links
-			 * filtered by having a certain relation defined
+			 * Create a node with its corresponding links
+			 * filtered by having a certain relation defined.
+			 * Uses some variables directly available in the scope...
+			 * @param {Object} node
 			 */
 			function createNode(node)
 			{

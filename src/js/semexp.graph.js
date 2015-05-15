@@ -37,7 +37,7 @@
 		 * @param {Array} nodes The node data for all nodes
 		 * @param {SVGGroup} layer The layer to append the node to
 		 * @param {Function} dragFunc 
-		 * @return {d3.selection} {@link |update selection}
+		 * @return {d3.selection} {@link https://github.com/mbostock/d3/wiki/Selections#d3_selectAll|d3 update selection}
 		 */
 		drawNodes : function(nodes, layer, dragFunc)
 		{

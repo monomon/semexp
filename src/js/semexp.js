@@ -1,6 +1,6 @@
 (function(semexp) {
 	'use strict';
-	
+
 	/**
 	 * @lends semexp
 	 */
@@ -10,6 +10,9 @@
 		 * an experiment in navigating semantic networks
 		 * <ul>
 		 * <li>display a semantic network in a graph  with a force-directed layout</li>
+		 * </ul>
+		 * @todo
+		 * <ul>
 		 * <li>allow arbitrary filters on the data</li>
 		 * <ul>
 		 * 	<li>filter relations to show as arrows from a list</li>
@@ -22,9 +25,6 @@
 		 * 	<li>add link - perhaps choose from a dropdown with limited options, e.g. relations that have already been defined in the model</li>
 		 * 	<li>modify node - metadata, relations</li>
 		 * </ul>
-		 * </ul>
-		 * @todo
-		 * <ul>
 		 * <li>extend the database class:</li>
 		 * <li>be able to add more data on a node (might be possible already?), e.g. an object or map</li>
 		 * <li>implement loading and saving directly inside the semnet class; push changes to a remote (regardless if it's a server or another client)</li>

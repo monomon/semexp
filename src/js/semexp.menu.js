@@ -33,8 +33,7 @@
 			var menuData = privateData;
 
 			var menuEl = d3.select('.controls')
-				.data([menuData])
-				;
+				.data([menuData]);
 
 			var menuElEnter = menuEl.enter()
 				.append('sidebar')

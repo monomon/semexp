@@ -73,7 +73,7 @@
 			 * Uses some variables directly available in the scope...
 			 * @param {Object} node
 			 */
-			function createNode(node)
+			function updateNodes(node)
 			{
 				var result = db.q();
 				result = result.filter(relationName, node.name);
@@ -96,7 +96,7 @@
 			}
 
 			for (var relationName in relations) {
-				nodes.forEach(createNode);
+				nodes.forEach(updateNodes);
 			}
 
 			return {

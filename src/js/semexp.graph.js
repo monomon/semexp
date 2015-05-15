@@ -12,7 +12,7 @@
 
 		layoutProps : {
 			linkStrength : 0.6,
-			distance : 200,
+			distance : 150,
 			friction : 0.9,
 			charge : -300,
 			gravity : 0.03,
@@ -23,7 +23,9 @@
 		/**
 		 * radius calc function - depends on number of relations
 		 * @todo: make this configurable
-		 * @param {Object} d Data object for which to calculate the radius
+		 * @param {Object} d Data object for which to calculate the radius.
+		 * Since this method is passed to an s3 selection, the data is
+		 * one 'datapoint'
 		 * @return {Number} radius
 		 */
 		getRadius : function(d)
@@ -265,4 +267,4 @@
 	};
 
 	return semexp;
-}(window.semexp || {}));
+}(window.semexp));

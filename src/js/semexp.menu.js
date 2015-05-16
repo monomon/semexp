@@ -1,21 +1,7 @@
 (function(semexp) {
 	'use strict';
-
-	/**
-	 * Default data for the menu
-	 */
-	var defaultData = {
-		defaultFactRelation : undefined,
-		defaultFactEntity : undefined,
-		defaultRelation : undefined,
-		filterFactRelation : undefined,
-		filterFactEntity : undefined,
-		filterFactToggle : false,
-		filterRelation : undefined,
-		filterRelationToggle : false
-	};
-
-	var privateData = defaultData;
+	
+	var privateData = {};
 
 	/**
 	 * @class
@@ -164,67 +150,68 @@
 			rootElement.append('label').text(label);
 			var relations = Object.keys(explorer.model.getRelations());
 
-			rootElement.append('select')
+			rootElement.append('input')
 				.attr('name', basename + 'FactRelation')
+				.attr('type', 'text')
 				.classed('relationSelector', true)
 				.on('change', this.updateData);
 
-			var select = d3.select('.relationSelector[name=' +
-				basename +
-				'FactRelation]');
+			// var select = d3.select('.relationSelector[name=' +
+			// 	basename +
+			// 	'FactRelation]');
 
-			var options = select.selectAll('option')
-				.data(relations);
+			// var options = select.selectAll('option')
+			// 	.data(relations);
 
-			options.enter()
-				.append('option')
-				.attr('value', function(d) {
-					return d;
-				})
-				.text(function(d) {
-					return d;
-				});
+			// options.enter()
+			// 	.append('option')
+			// 	.attr('value', function(d) {
+			// 		return d;
+			// 	})
+			// 	.text(function(d) {
+			// 		return d;
+			// 	});
 
-			options.exit().remove();
+			// options.exit().remove();
 
-			select.property('value', function () {
-				return data[this.name];
-			});
+			// select.property('value', function () {
+			// 	return data[this.name];
+			// });
 
-			var entities = explorer.model.getEntities();
+			// var entities = explorer.model.getEntities();
 
-			rootElement.append('select')
-				.attr('name', basename + 'FactEntity')
-				.classed('entitySelector', true)
-				.on('change', this.updateData);
+			// rootElement.append('select')
+			// 	.attr('name', basename + 'FactEntity')
+			// 	.classed('entitySelector', true)
+			// 	.on('change', this.updateData);
 			
-			// this is not the update selection
-			// force update all options, because
-			// data is not bound to menu data
-			var select2 = d3.select('.entitySelector[name=' +
-				basename +
-				'FactEntity]');
+			// // this is not the update selection
+			// // force update all options, because
+			// // data is not bound to menu data
+			// var select2 = d3.select('.entitySelector[name=' +
+			// 	basename +
+			// 	'FactEntity]');
 
-			var options2 = select2.selectAll('option')
-				.data(entities);
+			// var options2 = select2.selectAll('option')
+			// 	.data(entities);
 
-			options2.enter()
-				.append('option')
-				.attr('value', function(d) {
-					return d;
-				})
-				.text(function(d) {
-					return d;
-				});
+			// options2.enter()
+			// 	.append('option')
+			// 	.attr('value', function(d) {
+			// 		return d;
+			// 	})
+			// 	.text(function(d) {
+			// 		return d;
+			// 	});
 
-			select2.property('value', function () {
-				return data[this.name];
-			});
+			// select2.property('value', function () {
+			// 	return data[this.name];
+			// });
 
-			rootElement.append('input')
-				.property('value', 'apply')
-				.property('type', 'button')
-				.on('click', buttonCallback);
+			// rootElement.append('input')
+			// 	.property('value', 'apply')
+			// 	.property('type', 'button')
+			// 	.on('click', buttonCallback);
 
 			return rootElement;
 		},

@@ -4,6 +4,7 @@ body {
   padding : 0;
   width : 100vw;
   height : 100vh;
+  font-family: monospace;
 }
 
 body > svg
@@ -177,4 +178,41 @@ a {
 	stroke-width : 5;
 	stroke : #883333;
 	cursor : move;
+}
+
+.cli
+{
+	margin : 10px;
+	background-color : rgba(0,0,0,0.5);
+	position : fixed;
+	bottom : 250px;
+	width : 30em;
+	height : 10em;
+  	font-family: monospace;
+}
+
+.cli .history
+{
+	height : 100%;
+	color : white;
+	overflow-y : scroll;
+}
+
+.cli .history p
+{
+	display : block;
+	margin : 0;
+	padding : 0 5px 5px 5px;
+  	font-size : 0.9em;
+}
+
+.cli .history p + p
+{
+	padding-top : 5px;
+}
+
+.cli .input
+{
+	width : 100%;
+  	font-family: monospace;
 }

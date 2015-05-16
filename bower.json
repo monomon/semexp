@@ -17,6 +17,7 @@
   "dependencies": {
     "d3": "~3.5.5",
     "semnet": "git://github.com/asciimoo/semnet.git",
-    "Icons": "git://github.com/PicolSigns/Icons.git"
+    "Icons": "git://github.com/PicolSigns/Icons.git",
+    "autocomplete-0.3.0": "http://autocompletejs.com/releases/0.3.0/autocomplete-0.3.0.zip"
   }
 }

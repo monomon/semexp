@@ -47,6 +47,10 @@
 				explorer : { value : this }
 			});
 
+			this.cli = Object.create(semexp.cli, {
+				explorer : { value : this }
+			});
+
 
 			var body = d3.select('body');
 			this.svg = d3.select('body').append('svg')
@@ -82,7 +86,7 @@
 		},
 
 		/**
-		 * Add a relation instance between two nodes (triplet)
+		 * Add a fact triplet
 		 * @param {String} from Source node id
 		 * @param {String} link Relation id
 		 * @param {String} to Target node id
@@ -132,6 +136,7 @@
 				[this.tools],
 				this.menu.getData());
 			this.tools.draw(this.svg);
+			this.cli.draw();
 		},
 
 		/**

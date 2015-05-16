@@ -24,10 +24,13 @@ module.exports = function (grunt) {
 			build : {
 				src : [
 					'src/js/semexp.js',
-					'src/js/semexpgraph.js',
-					'src/js/semexpmenu.js',
-					'src/js/semexpmodel.js',
-					'src/js/semexptools.js'
+					'src/js/semexp.graph.js',
+					'src/js/semexp.menu.js',
+					'src/js/semexp.model.js',
+					'src/js/semexp.tools.js',
+					'src/js/semexp.transport.js',
+					'src/js/semexp.cli.js',
+					'src/js/semexp.filter.js'
 				],
 				dest : 'build/js/semexp.min.js'
 			}

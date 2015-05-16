@@ -149,12 +149,28 @@
 
 			rootElement.append('label').text(label);
 			var relations = Object.keys(explorer.model.getRelations());
+			var entities = explorer.model.getEntities();
 
-			rootElement.append('input')
+			rootElement.append('div')
 				.attr('name', basename + 'FactRelation')
-				.attr('type', 'text')
 				.classed('relationSelector', true)
-				.on('change', this.updateData);
+				.attr('id', basename + 'FactRelation');
+				// .on('change', this.updateData);
+
+			relations = relations.map(function (item) {
+				return {
+					value : item,
+					children : 'entities'
+				};
+			});
+
+			var factWidget = new AutoComplete(basename + 'FactRelation', {
+				initialList : 'relations',
+				lists : {
+					relations : relations,
+					entities : entities
+				}
+			});
 
 			// var select = d3.select('.relationSelector[name=' +
 			// 	basename +

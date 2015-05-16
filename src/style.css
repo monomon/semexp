@@ -51,6 +51,9 @@ a {
 	left : 10px;
 	bottom : 10px;
 	padding : 10px;
+	width : 30em;
+	height : 15em;
+	overflow-y : auto;
 	border : 1px solid #444;
 	align-items : stretch;
 }
@@ -74,7 +77,6 @@ a {
 
 .controls > * > *
 {
-	max-width : 10em;
 	flex : 1;
 }
 
@@ -185,7 +187,7 @@ a {
 	margin : 10px;
 	background-color : rgba(0,0,0,0.5);
 	position : fixed;
-	bottom : 250px;
+	bottom : 25em;
 	width : 30em;
 	height : 10em;
   	font-family: monospace;

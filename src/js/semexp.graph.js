@@ -12,7 +12,7 @@
 
 		layoutProps : {
 			linkStrength : 0.6,
-			distance : 150,
+			distance : 200,
 			friction : 0.9,
 			charge : -300,
 			gravity : 0.03,

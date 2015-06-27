@@ -33,24 +33,15 @@
 		 */
 		init : function(config)
 		{
-			this.graph = Object.create(semexp.graph, {
-				explorer : { value : this }
-			});
-			this.tools = Object.create(semexp.tools, {
-				explorer : { value : this }
-			});
-			this.menu = Object.create(semexp.menu, {
-				explorer : { value : this }
-			});
+			// inject explorer into components to be able
+			// to call methods directly
+			var subcomponents = ['graph', 'tools', 'menu', 'model'];
 
-			this.model = Object.create(semexp.model, {
-				explorer : { value : this }
-			});
-
-			this.cli = Object.create(semexp.cli, {
-				explorer : { value : this }
-			});
-
+			for (var i = 0; i < subcomponents.length; i++) {
+				this[subcomponents[i]] = Object.create(semexp[subcomponents[i]], {
+					explorer : { value : this }
+				});
+			}
 
 			var body = d3.select('body');
 			this.svg = d3.select('body').append('svg')
@@ -65,11 +56,17 @@
 		addNode : function(nodeName)
 		{
 			this.model.add(nodeName);
-			var menuData = this.menu.getData();
 			// add default fact
-			if (menuData.defaultFactRelation && menuData.defaultFactEntity) {
-				this.model.fact(nodeName, menuData.defaultFactRelation, menuData.defaultFactEntity);
+			if (this.model.defaultFact) {
+				for (var i = 0; i < this.model.defaultFact.length; i++) {
+					this.model.fact(
+						nodeName,
+						this.model.defaultFact[i][0].value,
+						this.model.defaultFact[i][1].value
+					);
+				}
 			}
+
 			this.tools.setData('fromNode', null);
 			this.refresh();
 		},
@@ -136,7 +133,7 @@
 				[this.tools],
 				this.menu.getData());
 			this.tools.draw(this.svg);
-			this.cli.draw();
+			// this.cli.draw();
 		},
 
 		/**

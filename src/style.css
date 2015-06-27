@@ -41,18 +41,19 @@ a {
   color: #00B7FF;
 }
 
-/* menu */
-
+/**
+ * Menu
+ */
 .controls {
-	background-color : rgba(120,120,120,0.2);
+	background-color : rgba(120,120,120,0.3);
 	display: flex;
 	flex-flow : column nowrap;
 	position: fixed;
 	left : 10px;
 	bottom : 10px;
 	padding : 10px;
-	width : 30em;
-	height : 15em;
+	width : 25em;
+	height : 23em;
 	overflow-y : auto;
 	border : 1px solid #444;
 	align-items : stretch;
@@ -102,92 +103,15 @@ a {
 	display : inline-block;
 }
 
-/* svg stuff - move to svg doc */
-
-.node *
-{
-	cursor: move;
-}
-
-.node circle
-{
-	fill : #444433;
-	stroke : #666633;
-	stroke-width : 2;
-}
-
-.node.active circle
-{
-	fill : #666644;
-}
-
-.node.activeTo circle
-{
-	fill : #777755;
-}
-
-.node text
-{
-	fill : #fff;
-	font-weight: bold;
-	pointer-events : 'none';
-	text-shadow: 1px 1px 1px rgba(0,0,0,0.7);
-}
-
-.link line
-{
-	stroke : #999933;
-	stroke-width : 10;
-}
-
-.link .label rect
-{
-	fill : #999933;
-}
-
-.link .label text
-{
-	pointer-events: none;
-	fill : #fff;
-	text-shadow: 1px 1px 1px rgba(0,0,0,0.7);
-}
-
-
-.tools .tool circle
-{
-	fill : #888;
-	stroke : #aaa;
-	stroke-width: 1;
-	opacity : 0.8;
-}
-
-.tools .tool:hover circle
-{
-	fill : #aaa;
-}
-.tools .tool image
-{
-	pointer-events: none;
-}
-
-.tools .connect
-{
-	background-image : url('../3p/PicolSigns/picol_latest_prerelease_svg/relevance.svg');
-}
-
-.connLine
-{
-	stroke-width : 5;
-	stroke : #883333;
-	cursor : move;
-}
-
+/**
+ * cli
+ */
 .cli
 {
 	margin : 10px;
 	background-color : rgba(0,0,0,0.5);
 	position : fixed;
-	bottom : 25em;
+	bottom : 35em;
 	width : 30em;
 	height : 10em;
   	font-family: monospace;
@@ -217,4 +141,37 @@ a {
 {
 	width : 100%;
   	font-family: monospace;
+}
+
+/**
+ * AutoComplete
+ */
+ul.dropdown-a3d44
+{
+  background: rgba(90,90,90,0.3);
+  border : 2px solid #444;
+}
+
+li.option-7b59f
+{
+  background: rgba(90,90,90,0.9);
+  color : #bababa;
+}
+
+li.highlighted-ea4c1
+
+{
+  color: #fff;
+}
+
+li.list-item-d13e9
+{
+	border-bottom: 1px solid #444;
+}
+
+div.autocomplete-container-7a26d
+{
+  border-radius: 0;
+  border : 2px solid #999;
+  background-color : rgba(0,0,0,0.3);
 }

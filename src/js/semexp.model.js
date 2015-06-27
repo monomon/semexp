@@ -7,6 +7,28 @@
 	 * Also able to export the semantic network to an object
 	 */
 	semexp.model = {
+		filterData : {
+			relations : undefined,
+			entities : undefined
+		},
+
+		defaultRelation : undefined,
+		defaultFact : undefined,
+
+		updateFilterData : function(data)
+		{
+			for (var key in data) {
+				this.filterData[key] = data[key];
+			}
+
+			this.explorer.refresh();
+		},
+
+		getFilterData : function()
+		{
+			return this.filterData;
+		},
+
 		/**
 		 * load data into semantic model
 		 * @param {Object} data
@@ -33,15 +55,26 @@
 			var links = [];
 			var nodeEntities = db.q();
 
-			var menuData = this.explorer.menu.getData();
-			if (menuData.filterFactRelation &&
-				menuData.filterFactEntity &&
-				menuData.filterFactToggle === true) {
+			var filterData = this.getFilterData();
+			if (filterData.entities) {
+				filterData.entities.forEach(function (item) {
+					if (item.length < 2) {
+						return;
+					}
 
-				nodeEntities = nodeEntities.filter(
-					menuData.filterFactRelation,
-					menuData.filterFactEntity
-				);
+					nodeEntities = nodeEntities.filter(
+						item[0].value,
+						item[1].value
+					);
+
+					// add node that filtered nodes are related to
+					// this might make the graph look better...
+					// think about it
+					// nodes.push({
+					// 	name : item[1].value,
+					// 	relations : 0
+					// });
+				});
 			}
 
 			nodeEntities = nodeEntities.all();
@@ -49,6 +82,7 @@
 
 			// build up graph data - translate from database
 			nodes = nodeEntities.reduce(function(prev, curr) {
+				// ignore relations
 				if (curr && !relations[curr]) {
 					prev.push({
 						name : curr,
@@ -56,15 +90,16 @@
 					});
 				}
 				return prev;
-			}, []);
+			}, nodes);
 
 			// go through all relations, add links for each
 			// go through each pair of nodes
-			if (menuData.filterRelationToggle === true &&
-				menuData.filterRelation) {
+			if (filterData.relations && filterData.relations.length > 0) {
 				var oldRelations = relations;
 				relations = {};
-				relations[menuData.filterRelation] = oldRelations[menuData.filterRelation];
+				filterData.relations.forEach(function (item) {
+					relations[item[0].value] = oldRelations[item[0].value];
+				});
 			}
 
 			/**
@@ -73,7 +108,7 @@
 			 * Uses some variables directly available in the scope...
 			 * @param {Object} node
 			 */
-			function updateNodes(node)
+			function updateLinks(node)
 			{
 				var result = db.q();
 				result = result.filter(relationName, node.name);
@@ -85,8 +120,10 @@
 					db.entities[item.name][relationName] &&
 					(nodeEntities.indexOf(item.name) >= 0);
 				});
+
 				relatedNodes.forEach(function (item) {
-					item.relations = db.entities[item.name][relationName].length || 0;
+					// add related nodes to make the graph better
+					item.relations = Object.keys(db.entities[item.name]).length || 0;
 					links.push({
 						source : item,
 						target : node,
@@ -96,7 +133,7 @@
 			}
 
 			for (var relationName in relations) {
-				nodes.forEach(updateNodes);
+				nodes.forEach(updateLinks);
 			}
 
 			return {

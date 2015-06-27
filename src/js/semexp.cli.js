@@ -6,6 +6,11 @@
 	 * Command-line interface
 	 */
 	semexp.cli = {
+		/**
+		 * Draw the cli
+		 * Create overall markup and hook handlers
+		 * @return {Element} cli root element
+		 */
 		draw : function ()
 		{
 			var explorer = this.explorer;
@@ -26,8 +31,17 @@
 			cliEl.appendChild(historyEl);
 			cliEl.appendChild(inputEl);
 			document.documentElement.appendChild(cliEl);
+
+			return cliEl;
 		},
 
+		/**
+		 * Event handler for the keypress event on the input field.
+		 * This adds the new entry to the internal collection
+		 * and refreshes the d3 selection.
+		 * Practically this function also creates the data binding.
+		 * @param {Event} evt
+		 */
 		handleInput : function (evt)
 		{
 			if (evt.which == 13) {

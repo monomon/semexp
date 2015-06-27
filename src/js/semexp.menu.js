@@ -8,6 +8,9 @@
 	 * Web form used to interact with the semantic network
 	 */
 	semexp.menu = {
+		factWidgets : [],
+		relationWidgets : [],
+
 		/**
 		 * draw menu
 		 * @return {Element} menu element
@@ -16,10 +19,10 @@
 		{
 			var explorer = this.explorer;
 
-			var menuData = privateData;
+			var filterData = explorer.model.getFilterData();
 
 			var menuEl = d3.select('.controls')
-				.data([menuData]);
+				.data([filterData]);
 
 			var menuElEnter = menuEl.enter()
 				.append('sidebar')
@@ -50,63 +53,69 @@
 				.attr('type','submit')
 				.property('value', 'add node');
 
-			this.createFactSelector(
-				menuElEnter.append(elType),
-				'default',
-				'default fact',
-				function () {
-					explorer.refresh();
-				},
-				menuData
-			);
+			menuElEnter.append(elType)
+				.call(function (sel) {
+					explorer.menu.createFactSelector(
+						sel,
+						'default',
+						'default fact',
+						function (newData, oldData) {
+							explorer.model.defaultFact = newData;
+						},
+						filterData
+					);
+				});
+
 
 			this.createRelationSelector(
 				menuElEnter.append(elType),
 				'default',
 				'default relation',
-				function () {
-					explorer.refresh();
+				function (newData, oldData) {
+					explorer.model.defaultRelation = newData;
 				},
-				menuData
+				filterData
 			);
 
 			this.createFactSelector(
 				menuElEnter.append(elType),
 				'filter',
 				'filter fact',
-				function () {
-					explorer.refresh();
+				function(newValue, oldValue)
+				{
+					explorer.model.updateFilterData.call(
+						explorer.model,
+						{
+							entities : newValue
+						}
+					);
 				},
-				menuData
+				filterData
 			).append('input')
 				.attr('type', 'checkbox')
 				.style({'width': 15, 'flex' : 'none'})
 				.attr('name', 'filterFactToggle')
 				.on('change', this.updateCheckbox);
 
-			d3.select('input[name=filterFactToggle]')
-				.property('checked', function (d) {
-					return d[this.name];
-				});
-
 			this.createRelationSelector(
 				menuElEnter.append(elType),
 				'filter',
 				'filter relation',
-				function () {
-					explorer.refresh();
+				function(newValue, oldValue)
+				{
+					explorer.model.updateFilterData.call(
+						explorer.model,
+						{
+							relations : newValue
+						}
+					);
 				},
-				menuData
+				filterData
 			).append('input')
 				.attr('type', 'checkbox')
 				.style({'width': 15, 'flex' : 'none'})
 				.attr('name', 'filterRelationToggle')
 				.on('change', this.updateCheckbox)
-				.property('checked', function (d) {
-					return d[this.name];
-				});
-
-			d3.select('input[name=filterRelationToggle]')
 				.property('checked', function (d) {
 					return d[this.name];
 				});
@@ -127,8 +136,6 @@
 					console.log(this);
 				});
 
-			// this.applyData(menuData);
-
 			menuEl.exit().remove();
 
 			return menuEl;
@@ -147,16 +154,11 @@
 		{
 			var explorer = this.explorer;
 
-			rootElement.append('label').text(label);
 			var relations = Object.keys(explorer.model.getRelations());
 			var entities = explorer.model.getEntities();
+			var name = basename + 'FactRelation';
 
-			rootElement.append('div')
-				.attr('name', basename + 'FactRelation')
-				.classed('relationSelector', true)
-				.attr('id', basename + 'FactRelation');
-				// .on('change', this.updateData);
-
+			// relations linked to entities
 			relations = relations.map(function (item) {
 				return {
 					value : item,
@@ -164,70 +166,31 @@
 				};
 			});
 
-			var factWidget = new AutoComplete(basename + 'FactRelation', {
-				initialList : 'relations',
-				lists : {
-					relations : relations,
-					entities : entities
-				}
-			});
+			rootElement.append('label').text(label);
 
-			// var select = d3.select('.relationSelector[name=' +
-			// 	basename +
-			// 	'FactRelation]');
+			rootElement
+				.append('div')
+				.attr('name', name)
+				.classed('relationSelector', true)
+				.call(function (selection) {
+					if (selection.node()){
+						var factWidget = new AutoComplete(
+							selection.node(), {
+							initialList : 'relations',
+							lists : {
+								relations : relations,
+								entities : entities
+							},
+							onChange : buttonCallback
+						});
 
-			// var options = select.selectAll('option')
-			// 	.data(relations);
+						if (data && data.entities) {
+							factWidget.setData(data.entities);
+						}
 
-			// options.enter()
-			// 	.append('option')
-			// 	.attr('value', function(d) {
-			// 		return d;
-			// 	})
-			// 	.text(function(d) {
-			// 		return d;
-			// 	});
-
-			// options.exit().remove();
-
-			// select.property('value', function () {
-			// 	return data[this.name];
-			// });
-
-			// var entities = explorer.model.getEntities();
-
-			// rootElement.append('select')
-			// 	.attr('name', basename + 'FactEntity')
-			// 	.classed('entitySelector', true)
-			// 	.on('change', this.updateData);
-			
-			// // this is not the update selection
-			// // force update all options, because
-			// // data is not bound to menu data
-			// var select2 = d3.select('.entitySelector[name=' +
-			// 	basename +
-			// 	'FactEntity]');
-
-			// var options2 = select2.selectAll('option')
-			// 	.data(entities);
-
-			// options2.enter()
-			// 	.append('option')
-			// 	.attr('value', function(d) {
-			// 		return d;
-			// 	})
-			// 	.text(function(d) {
-			// 		return d;
-			// 	});
-
-			// select2.property('value', function () {
-			// 	return data[this.name];
-			// });
-
-			// rootElement.append('input')
-			// 	.property('value', 'apply')
-			// 	.property('type', 'button')
-			// 	.on('click', buttonCallback);
+						explorer.menu.factWidgets.push(factWidget);
+					}
+				});
 
 			return rootElement;
 		},
@@ -249,25 +212,28 @@
 			var name = basename + 'Relation';
 
 			rootElement.append('label').text(label);
-			rootElement.append('select')
+			rootElement
+				.append('div')
 				.attr('name', name)
 				.classed('relationSelector', true)
-				.on('change', this.updateData);
+				.call(function (selection) {
+					if (selection.node()){
+						var relWidget = new AutoComplete(
+							selection.node(), {
+							initialList : 'relations',
+							lists : {
+								relations : relations
+							},
+							onChange : changeCallback
+						});
 
-			var select = d3.select('.relationSelector[name='+name+']');
+						if (data && data.relations) {
+							relWidget.setData(data.relations);
+						}
 
-			var options = select.selectAll('option').data(relations).enter()
-				.append('option')
-				.attr('value', function(d) {
-					return d;
-				})
-				.text(function(d) {
-					return d;
+						explorer.menu.relationWidgets.push(relWidget);
+					}
 				});
-
-			select.property('value', function () {
-				return data[this.name];
-			});
 
 			return rootElement;
 		},
@@ -276,9 +242,9 @@
 		 * update data from a change event of an input
 		 *
 		 */
-		updateData : function ()
+		updateData : function (newValue, oldValue)
 		{
-			privateData[this.name] = this.value;
+			privateData = newValue;
 			d3.select('.controls').data(privateData);
 		},
 
@@ -325,7 +291,19 @@
 		 */
 		refresh : function ()
 		{
-			this.draw();
+			var model = this.explorer.model;
+			var relations = Object.keys(model.getRelations());
+			this.relationWidgets.forEach(function (item) {
+				item.setList('relations', relations);
+			});
+
+			this.factWidgets.forEach(function (item) {
+				item.setList('entities', model.getEntities());
+				item.setList('relations', {
+					children : 'entities',
+					options : relations
+				});
+			});
 		}
 	};
 

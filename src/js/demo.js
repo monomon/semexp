@@ -75,11 +75,6 @@ document.addEventListener('DOMContentLoaded', function(evt) {
 		}
 	});
 
-	explorer.menu.applyData({
-		filterRelation : 'isA',
-		filterRelationToggle : true
-	});
-	// need to refresh manually - should this be done
-	// when menu is updated?
+	explorer.menu.relationWidgets[1].setValue([['isA']]);
 	explorer.refresh();
 });

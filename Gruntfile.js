@@ -29,8 +29,7 @@ module.exports = function (grunt) {
 					'src/js/semexp.model.js',
 					'src/js/semexp.tools.js',
 					'src/js/semexp.transport.js',
-					'src/js/semexp.cli.js',
-					'src/js/semexp.filter.js'
+					'src/js/semexp.cli.js'
 				],
 				dest : 'build/js/semexp.min.js'
 			}
@@ -46,7 +45,7 @@ module.exports = function (grunt) {
 				}, {
 					expand: true,
 					flatten: true,
-					src: ['src/style.css'],
+					src: ['src/*.css'],
 					dest: 'build/'
 				}]
 			},
@@ -60,7 +59,7 @@ module.exports = function (grunt) {
 				}, {
 					expand: true,
 					flatten: true,
-					src: ['build/style.css'],
+					src: ['build/*.css'],
 					dest: 'dist/'
 				}, {
 					expand: true,
@@ -68,7 +67,10 @@ module.exports = function (grunt) {
 					cwd : 'bower_components',
 					src: [
 						'd3/d3.min.js',
-						'semnet/semnet.js'
+						'semnet/semnet.js',
+						'jquery/dist/jquery.min.js',
+						'autocomplete-0.3.0/autocomplete-0.3.0.min.js',
+						'autocomplete-0.3.0/autocomplete-0.3.0.min.css'
 					],
 					dest: 'dist/vendor/'
 				}, {

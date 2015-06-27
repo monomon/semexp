@@ -185,15 +185,13 @@
 					var origin = d3.mouse(d3.select('svg')[0][0]);
 					var d = d3.select('.tools').datum();
 
-					var menuData = d3.select('.controls').datum();
-
 					// if (d && d.fromNode !== null) {
 					// 	var fromNode = d.fromNode;
 					// 	origin = [fromNode.x, fromNode.y];
 					// }
 
-					if (menuData && menuData.defaultRelation) {
-						d.linkType = menuData.defaultRelation;
+					if (explorer.model && explorer.model.defaultRelation) {
+						d.linkType = explorer.model.defaultRelation[0][0].value;
 					}
 
 					// place both points at the center for consistency
@@ -218,6 +216,7 @@
 				{
 					d3.event.sourceEvent.stopPropagation();
 					d3.select('.connLine').transition().style('opacity', 0);
+					console.log(data);
 					console.log('dropping (!)');
 					d3.selectAll('.activeTo').classed('activeTo', false);
 

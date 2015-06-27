@@ -30,6 +30,12 @@
     semexp
     </h2>
     
+        <div class="class-description">Semantic explorer,
+an experiment in navigating semantic networks
+<ul>
+<li>display a semantic network in a graph  with a force-directed layout</li>
+</ul></div>
+    
 </header>  
 
 <article>
@@ -45,21 +51,6 @@
 </dt>
 <dd>
     
-    
-    <div class="description">
-        Semantic explorer
-an experiment in navigating semantic networks
-<ul>
-<li>display a semantic network in a graph (force-directed layout)</li>
-<li>allow arbitrary filters on the data - select from a menu or cli</li>
-<li>tools for manipulating the data, e.g.:</li>
-<ul>
-	<li>add node - enter node details, name at a minimum</li>
-	<li>add link - perhaps choose from a dropdown with limited options, e.g. relations that have already been defined in the model</li>
-	<li>modify node - metadata, relations</li>
-</ul>
-</ul>
-    </div>
     
 
     
@@ -91,7 +82,7 @@ an experiment in navigating semantic networks
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="semexp.js.html">semexp.js</a>, <a href="semexp.js.html#line29">line 29</a>
+        <a href="semexp.js.html">semexp.js</a>, <a href="semexp.js.html#line34">line 34</a>
     </li></ul></dd>
     
     
@@ -104,6 +95,18 @@ an experiment in navigating semantic networks
     <dd class="tag-todo">
         <ul>
             <li><ul>
+<li>allow arbitrary filters on the data</li>
+<ul>
+	<li>filter relations to show as arrows from a list</li>
+	<li>filter entities which have certain relations defined (how to make this flexible?)</li>
+	<li>allow both from menu and from a cli</li>
+</ul>
+<li>tools for manipulating the data, e.g.:</li>
+<ul>
+	<li>add node - enter node details, name at a minimum</li>
+	<li>add link - perhaps choose from a dropdown with limited options, e.g. relations that have already been defined in the model</li>
+	<li>modify node - metadata, relations</li>
+</ul>
 <li>extend the database class:</li>
 <li>be able to add more data on a node (might be possible already?), e.g. an object or map</li>
 <li>implement loading and saving directly inside the semnet class; push changes to a remote (regardless if it's a server or another client)</li>
@@ -140,6 +143,9 @@ an experiment in navigating semantic networks
         <h3 class="subsection-title">Classes</h3>
         
         <dl>
+            <dt><a href="semexp.cli.html">cli</a></dt>
+            <dd></dd>
+        
             <dt><a href="semexp.graph.html">graph</a></dt>
             <dd></dd>
         
@@ -164,7 +170,7 @@ an experiment in navigating semantic networks
         <dl>
             
 <dt>
-    <h4 class="name" id="addLink"><span class="type-signature">&lt;static> </span>addLink<span class="signature">(from, link, to)</span><span class="type-signature"></span></h4>
+    <h4 class="name" id="addFact"><span class="type-signature">&lt;static> </span>addFact<span class="signature">(from, link, to)</span><span class="type-signature"></span></h4>
     
     
 </dt>
@@ -172,7 +178,7 @@ an experiment in navigating semantic networks
     
     
     <div class="description">
-        Add a relation instance between two nodes (triplet)
+        Add a fact triplet
     </div>
     
 
@@ -299,7 +305,7 @@ an experiment in navigating semantic networks
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="semexp.js.html">semexp.js</a>, <a href="semexp.js.html#line85">line 85</a>
+        <a href="semexp.js.html">semexp.js</a>, <a href="semexp.js.html#line91">line 91</a>
     </li></ul></dd>
     
     
@@ -556,7 +562,7 @@ an experiment in navigating semantic networks
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="semexp.js.html">semexp.js</a>, <a href="semexp.js.html#line73">line 73</a>
+        <a href="semexp.js.html">semexp.js</a>, <a href="semexp.js.html#line79">line 79</a>
     </li></ul></dd>
     
     
@@ -626,7 +632,7 @@ Clean up subcomponents
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="semexp.js.html">semexp.js</a>, <a href="semexp.js.html#line154">line 154</a>
+        <a href="semexp.js.html">semexp.js</a>, <a href="semexp.js.html#line161">line 161</a>
     </li></ul></dd>
     
     
@@ -695,7 +701,7 @@ Clean up subcomponents
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="semexp.js.html">semexp.js</a>, <a href="semexp.js.html#line120">line 120</a>
+        <a href="semexp.js.html">semexp.js</a>, <a href="semexp.js.html#line126">line 126</a>
     </li></ul></dd>
     
     
@@ -812,7 +818,7 @@ Clean up subcomponents
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="semexp.js.html">semexp.js</a>, <a href="semexp.js.html#line144">line 144</a>
+        <a href="semexp.js.html">semexp.js</a>, <a href="semexp.js.html#line151">line 151</a>
     </li></ul></dd>
     
     
@@ -881,7 +887,7 @@ Clean up subcomponents
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="semexp.js.html">semexp.js</a>, <a href="semexp.js.html#line109">line 109</a>
+        <a href="semexp.js.html">semexp.js</a>, <a href="semexp.js.html#line115">line 115</a>
     </li></ul></dd>
     
     
@@ -950,7 +956,7 @@ Clean up subcomponents
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="semexp.js.html">semexp.js</a>, <a href="semexp.js.html#line101">line 101</a>
+        <a href="semexp.js.html">semexp.js</a>, <a href="semexp.js.html#line107">line 107</a>
     </li></ul></dd>
     
     
@@ -1019,7 +1025,7 @@ Clean up subcomponents
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="semexp.js.html">semexp.js</a>, <a href="semexp.js.html#line135">line 135</a>
+        <a href="semexp.js.html">semexp.js</a>, <a href="semexp.js.html#line142">line 142</a>
     </li></ul></dd>
     
     
@@ -1060,13 +1066,13 @@ Clean up subcomponents
 </div>
 
 <nav>
-    <h2><a href="index.html">Index</a></h2><h3>Classes</h3><ul><li><a href="semexp.html">semexp</a></li><li><a href="semexp.graph.html">graph</a></li><li><a href="semexp.menu.html">menu</a></li><li><a href="semexp.model.html">model</a></li><li><a href="semexp.tools.html">tools</a></li></ul>
+    <h2><a href="index.html">Index</a></h2><h3>Classes</h3><ul><li><a href="semexp.html">semexp</a></li><li><a href="semexp.cli.html">cli</a></li><li><a href="semexp.graph.html">graph</a></li><li><a href="semexp.menu.html">menu</a></li><li><a href="semexp.model.html">model</a></li><li><a href="semexp.tools.html">tools</a></li></ul>
 </nav>
 
 <br clear="both">
 
 <footer>
-    Documentation generated by <a href="https://github.com/jsdoc3/jsdoc">JSDoc 3.2.2</a> on Thu May 14 2015 20:46:26 GMT+0200 (CEST)
+    Documentation generated by <a href="https://github.com/jsdoc3/jsdoc">JSDoc 3.2.2</a> on Sun May 17 2015 04:27:27 GMT+0200 (CEST)
 </footer>
 
 <script> prettyPrint(); </script>

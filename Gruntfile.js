@@ -40,7 +40,7 @@ module.exports = function (grunt) {
 				files: [{
 					expand: true,
 					flatten: true,
-					src : ['src/js/demo.js'],
+					src : ['src/js/demo.js','src/js/test_data.js'],
 					dest : 'build/js/'
 				}, {
 					expand: true,

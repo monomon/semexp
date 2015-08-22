@@ -90,7 +90,7 @@
 				.classed('link', true);
 
 			g.append('line')
-				.attr('marker-end', 'url(#Triangle)');
+				.style('marker-end', 'url(#Triangle)');
 			var label = g.append('g')
 				.classed('label', true);
 
@@ -183,7 +183,7 @@
 				.attr('markerWidth', 10)
 				.attr('markerHeight', 10)
 				.append('path')
-				.attr('fill', '#999933')
+				.attr('fill', '#446622')
 				.attr('d', 'M 0 0 L 3 2 L 0 4 z');
 
 			this.layers = {

@@ -1,15 +1,10 @@
 body {
-  padding: 50px;
   background-color : #222;
-  padding : 0;
-  width : 100vw;
-  height : 100vh;
+  display : flex;
+  flex-direction : row;
   font-family: monospace;
-}
-
-body > svg
-{
-	margin : 0;
+  padding : 0;
+  margin : 0;
 }
 
 body, input, select, label
@@ -37,6 +32,7 @@ input[type=button]:hover
 	cursor : pointer;
 }
 
+
 a {
   color: #00B7FF;
 }
@@ -47,15 +43,14 @@ a {
 .controls {
 	background-color : rgba(120,120,120,0.3);
 	display: flex;
+	order : 1;
 	flex-flow : column nowrap;
-	position: fixed;
-	left : 10px;
-	bottom : 10px;
 	padding : 10px;
-	width : 25em;
-	height : 23em;
+	width : 20em;
+	flex : none;
+	height : 100vh;
 	overflow-y : auto;
-	border : 1px solid #444;
+	border-right : 1px solid #555;
 	align-items : stretch;
 }
 
@@ -64,21 +59,22 @@ a {
 	border : none;
 	display : flex;
 	flex-flow : row nowrap;
-	flex: 0;
 	margin : 0;
 	align-items : flex-start;
+	align-content : stretch;
 }
 
 .controls > * + *
 {
 	margin-top : 5px;
 	padding-top : 5px;
-	border-top : 1px solid #444;
+	border-top : 1px solid #555;
+	align-content : stretch;
 }
 
 .controls > * > *
 {
-	flex : 1;
+	flex : 1 1 auto;
 }
 
 .controls > * > * + *
@@ -86,21 +82,17 @@ a {
 	margin-left : 5px;
 }
 
-
-.controls input[type=button],
-.controls input[type=submit]
+.controls * input[type=text]
 {
-	flex : none;
-	width:5em;
+	width : 9em;
 }
 
 .controls label
 {
 	color : #bababa;
-	width : 8em;
-	text-align: right;
+	width : 3em;
 	flex : none;
-	display : inline-block;
+	text-align: right;
 }
 
 /**
@@ -174,4 +166,5 @@ div.autocomplete-container-7a26d
   border-radius: 0;
   border : 2px solid #999;
   background-color : rgba(0,0,0,0.3);
+  flex : 0 1 4em;
 }

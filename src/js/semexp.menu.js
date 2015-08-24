@@ -21,7 +21,7 @@
 
 			var filterData = explorer.model.getFilterData();
 
-			var menuEl = d3.select('.controls')
+			var menuEl = d3.select('body').selectAll('.controls')
 				.data([filterData]);
 
 			var menuElEnter = menuEl.enter()
@@ -120,22 +120,44 @@
 					return d[this.name];
 				});
 
-			var buttonGroup = menuElEnter.append(elType);
-			buttonGroup.append('input')
+			var saveGroup = menuElEnter.append(elType);
+			saveGroup.append('input')
+				.attr('type', 'text');
+
+			saveGroup.append('input')
 				.attr('type', 'button')
-				.property('value', 'save')
+				.property('value', 'save as')
 				.on('click', function () {
 					explorer.save.call(explorer);
 				});
 
-			buttonGroup.append(elType)
+			var buttonGroup = menuElEnter.append(elType);
+			buttonGroup.append(elType).append('input')
+				.attr('type','button')
+				.property('value', 'get JSON')
+				.on('click', function () {
+					explorer.getJSON.call(explorer);
+				});
+
+			buttonGroup.append(elType).append('input')
+				.attr('type','button')
+				.property('value', 'clear')
+				.on('click', function () {
+					explorer.clear();
+				});
+			var loadContainer = menuElEnter.append(elType);
+			var dataSelect = loadContainer.append('select').attr('size', 2);
+			for (var key in testData) {
+				console.log(key);
+				dataSelect.append('option').property('value', key).text(key);
+			}
+			loadContainer.append(elType)
 				.append('input')
 				.attr('type', 'button')
-				.property('value', 'load')
+				.property('value', 'load from local storage')
 				.on('click', function () {
 					console.log(this);
 				});
-
 			menuEl.exit().remove();
 
 			return menuEl;

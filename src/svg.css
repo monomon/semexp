@@ -1,0 +1,67 @@
+body > svg
+{
+	order : 2;
+	flex : 1 1 auto;
+}
+
+.node,
+.tool
+{
+	cursor : pointer;
+}
+
+.node text
+{
+	pointer-events : none;
+}
+
+.node circle
+{
+	fill : #224411;
+	stroke : #446622;
+	stroke-width : 1px;
+}
+
+.node circle:hover
+{
+	fill : #224422;
+}
+
+.label rect
+{
+	fill : #113311;
+	stroke : #446622;
+	stroke-width : 1px;
+}
+
+line
+{
+	stroke : #446622;
+	stroke-width : 8px;
+}
+
+text
+{
+	fill : white;
+}
+
+.tool circle
+{
+	fill : #666;
+	stroke : #444;
+}
+
+.tool image
+{
+	pointer-events : none;
+}
+
+.tool circle:hover
+{
+	fill : #888;
+}
+
+marker
+{
+	fill : #224411;
+}

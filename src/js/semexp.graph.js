@@ -163,6 +163,7 @@
 		 */
 		draw : function(graph, svg, tickComponents)
 		{
+			var svgRect = svg.node().getBoundingClientRect();
 			this.force = d3.layout.force()
 				.linkStrength(this.layoutProps.linkStrength)
 				.distance(this.layoutProps.distance)
@@ -171,7 +172,7 @@
 				.gravity(this.layoutProps.gravity)
 				.theta(this.layoutProps.theta)
 				.alpha(this.layoutProps.alpha)
-				.size([svg.property('width').baseVal.value, svg.property('height').baseVal.value]);
+				.size([svgRect.width, svgRect.height]);
 
 			var defs = svg.append('defs');
 			defs.append('marker')

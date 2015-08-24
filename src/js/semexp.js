@@ -35,7 +35,7 @@
 		{
 			// inject explorer into components to be able
 			// to call methods directly
-			var subcomponents = ['graph', 'tools', 'menu', 'model'];
+			var subcomponents = ['tools', 'menu', 'graph', 'model'];
 
 			for (var i = 0; i < subcomponents.length; i++) {
 				this[subcomponents[i]] = Object.create(semexp[subcomponents[i]], {
@@ -44,9 +44,8 @@
 			}
 
 			var body = d3.select('body');
-			this.svg = d3.select('body').append('svg')
-				.attr('width', body.property('clientWidth'))
-				.attr('height', body.property('clientHeight'));
+			var menu = d3.select('.controls');
+			this.svg = d3.select('body').append('svg');
 		},
 
 		/**
@@ -144,6 +143,11 @@
 			console.log(this.model.export());
 		},
 
+		getJSON : function()
+		{
+			window.alert(JSON.stringify(this.model.export()));
+		},
+
 		/**
 		 * Load data and draw its graph
 		 * @param {Object} data
@@ -162,6 +166,7 @@
 		{
 			this.graph.clear();
 			this.svg.selectAll('*').remove();
+			this.model.clear();
 		}
 	};
 

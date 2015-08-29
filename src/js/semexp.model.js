@@ -193,6 +193,15 @@
 		fact : function(from, relation, to)
 		{
 			db.fact(from, relation, to);
+		},
+
+		/**
+		 * Clear all data from the model
+		 */
+		clear : function()
+		{
+			// TODO: implement this
+			db = new Semnet();
 		}
 	};
 

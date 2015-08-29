@@ -77,7 +77,7 @@
 		 */
 		addRelation : function(relName, options)
 		{
-			this.model.add(relName, options);
+			this.model.add(relName, options || {});
 			this.refresh();
 		},
 

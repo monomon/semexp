@@ -148,15 +148,21 @@
 			var loadContainer = menuElEnter.append(elType);
 			var dataSelect = loadContainer.append('select').attr('size', 2);
 			for (var key in testData) {
-				console.log(key);
-				dataSelect.append('option').property('value', key).text(key);
+				dataSelect.append('option')
+					.property('value', key)
+					.text(key);
 			}
 			loadContainer.append(elType)
 				.append('input')
 				.attr('type', 'button')
 				.property('value', 'load from local storage')
-				.on('click', function () {
-					console.log(this);
+				.on('click', function (evt) {
+					// load a data set from local storage
+					var options = dataSelect.node().selectedOptions;
+					if (options.length > 0) {
+						explorer.clear();
+						explorer.load(testData[options[0].value]);
+					}
 				});
 			menuEl.exit().remove();
 
